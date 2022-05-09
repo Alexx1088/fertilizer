@@ -1,6 +1,10 @@
 <?php
 
+
+use App\Http\Controllers\Main\IndexController2;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Culture\IndexController3;
+use App\Http\Controllers\Admin\Clients\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +17,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
+
+    Route::get('/', IndexController::class);
+
+});*/
+
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
+    function () {
+        Route::group([ 'namespace' => 'Main',],
+            function () {
+
+                Route::get('/', 'IndexController')->name('admin.main.index');
+
+            });
+
+Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
+    function () {
+
+        Route::get('/', 'IndexController')->name('clients.index');
+
+    });
+        Route::group([ 'namespace' => 'Fertilizer', 'prefix' => 'fertilizer'], function () {
+
+            Route::get('/', 'IndexController')->name('fertilizer.index');
+        });
+
+        Route::group([ 'namespace' => 'Culture', 'prefix' => 'culture'],
+            function () {
+
+                Route::get('/', 'IndexController')->name('culture.index');
+                Route::get('/create', 'CreateController')->name('culture.create');
+
+            });
+    });
+
+
+
 
 Auth::routes();
 
