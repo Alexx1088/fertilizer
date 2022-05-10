@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Добавить культуру</h1>
+                    <h1 class="m-0">Редактирование культуры</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -29,15 +29,17 @@
 
 <div class="col-12">
 
-    <form action="{{ route('admin.culture.store') }}" method="post" class="w-25">
+    <form action="{{ route( 'admin.culture.update', $culture->id) }}" method="post" class="w-25">
         @csrf
+        @method('patch')
         <div class="form-group">
-        <input type="text" class="form-control" name="name" placeholder="Название культуры">
+        <input type="text" class="form-control" name="name" placeholder="Название культуры"
+        value="{{ $culture->name }}">
             @error('name')
 <div class="text-danger">Это поле необходимо заполнить</div>
             @enderror
         </div>
-        <input type="submit" class="btn btn-primary" value="Добавить">
+        <input type="submit" class="btn btn-primary" value="Обновить">
     </form>
             </div>
              </div>

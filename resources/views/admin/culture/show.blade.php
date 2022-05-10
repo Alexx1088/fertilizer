@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Добавить культуру</h1>
+                    <h1 class="m-0">{{ $culture->name }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,20 +25,34 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
 
-<div class="col-12">
+            <div class="row"
+<div >
+    <div class="card col-6">
+        <!-- /.card-header -->
+        <div class="card-body table-responsive p-0" style="height: 300px;">
+            <table class="table table-head-fixed text-nowrap">
 
-    <form action="{{ route('admin.culture.store') }}" method="post" class="w-25">
-        @csrf
-        <div class="form-group">
-        <input type="text" class="form-control" name="name" placeholder="Название культуры">
-            @error('name')
-<div class="text-danger">Это поле необходимо заполнить</div>
-            @enderror
+                <tbody>
+
+                <tr>
+                    <td>ID</td>
+                    <td>Название</td>
+
+                </tr>
+
+                <tr>
+                    <td>{{ $culture->id }}</td>
+                    <td>{{ $culture->name }}</td>
+                    <td ><a href="{{ route('admin.culture.edit', $culture->id) }}" class="text-success" >
+                            <i class="fas fa-pencil-alt" ></i></a></td>
+                 </tr>
+
+                   </tbody>
+            </table>
         </div>
-        <input type="submit" class="btn btn-primary" value="Добавить">
-    </form>
+        <!-- /.card-body -->
+    </div>
             </div>
              </div>
             <!-- /.row -->

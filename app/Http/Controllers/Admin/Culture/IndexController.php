@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Culture;
 
 use App\Http\Controllers\Controller;
+use App\Models\Culture;
 
 class IndexController extends Controller
 {
@@ -10,6 +11,8 @@ class IndexController extends Controller
     public function __invoke()
     {
 
-        return view('admin.culture.index');
+        $cultures = Culture::all();
+
+        return view('admin.culture.index', compact('cultures'));
     }
 }
