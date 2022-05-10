@@ -12,7 +12,6 @@ class DeleteController extends Controller
     public function __invoke( Culture $culture)
     {
 
-        dd('delete');
         $culture->delete();
 
         return redirect()->route('admin.culture.index');

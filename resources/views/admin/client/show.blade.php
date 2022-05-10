@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ $culture->name }}</h1>
+                    <h1 class="m-0">{{ $client->name }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -42,12 +42,12 @@
                 </tr>
 
                 <tr>
-                    <td>{{ $culture->id }}</td>
-                    <td >{{ $culture->name }}</td>
-                    <td ><a href="{{ route('admin.culture.edit', $culture->id) }}" class="text-success" >
+                    <td>{{ $client->id }}</td>
+                    <td >{{ $client->name }}</td>
+                    <td ><a href="{{ route('admin.culture.edit', $client->id) }}" class="text-success" >
                             <i class="fas fa-pencil-alt" ></i></a></td>
                     <td>
-                        <form action="{{route('admin.culture.delete', $culture->id)}}"
+                        <form action="{{route('admin.culture.delete', $client->id)}}"
                               method = "POST">
                             @csrf
                             @method('DELETE')

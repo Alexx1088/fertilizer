@@ -35,12 +35,18 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
 Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
     function () {
 
-        Route::get('/', 'IndexController')->name('clients.index');
+        Route::get('/', 'IndexController')->name('admin.clients.index');
+        Route::get('/create', 'CreateController')->name('admin.clients.create');
+        Route::post('/', 'StoreController')->name('admin.clients.store');
+        Route::get('/{client}', 'ShowController')->name('admin.clients.show');
+        Route::get('/{client}/edit', 'EditController')->name('admin.clients.edit');
+        Route::patch('/{client}', 'UpdateController')->name('admin.clients.update');
+        Route::delete('/{client}', 'DeleteController')->name('admin.clients.delete');
 
     });
         Route::group([ 'namespace' => 'Fertilizer', 'prefix' => 'fertilizer'], function () {
 
-            Route::get('/', 'IndexController')->name('fertilizer.index');
+            Route::get('/', 'IndexController')->name('admin.fertilizer.index');
         });
 
         Route::group([ 'namespace' => 'Culture', 'prefix' => 'cultures'],

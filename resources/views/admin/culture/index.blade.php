@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                 @foreach($cultures as $culture)
-                <form>
+                    <tr>
                     <td>{{ $culture->id }}</td>
                     <td>{{ $culture->name }}</td>
                     <td><a href="{{ route('admin.culture.show', $culture->id) }}"><i class="far fa-eye"></i></a></td>
@@ -54,7 +54,7 @@
 
                     <td >
                            <form action="{{route('admin.culture.delete', $culture->id)}}"
-                                 method = "POST">
+                       method = "POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit"  class="border-0 bg-transparent">
