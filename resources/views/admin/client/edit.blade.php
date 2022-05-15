@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Редактирование списка клиентов</h1>
+                    <h1 class="m-0">Редактирование клиента</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -29,14 +29,39 @@
 
 <div class="col-12">
 
-    <form action="{{ route( 'admin.client.update', $culture->id) }}" method="post" class="w-25">
+    <form action="{{ route( 'admin.clients.update', $client->id) }}" method="post" class="w-25">
         @csrf
         @method('patch')
         <div class="form-group">
-        <input type="text" class="form-control" name="name" placeholder="Ф.И.О. клиента"
+            <label>Наименование</label>
+        <input type="text" class="form-control" name="name"
         value="{{ $client->name }}">
             @error('name')
 <div class="text-danger">Это поле необходимо заполнить</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label>Дата договора</label>
+            <input type="date" class="form-control" name="agreement_date"
+                   value="{{ $client->agreement_date }}">
+            @error('agreement_date')
+            <div class="text-danger">Это поле необходимо заполнить</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label>Стоимость поставки</label>
+            <input type="number" class="form-control" name="delivery_cost"
+                   value="{{ $client->delivery_cost }}">
+            @error('delivery_cost')
+            <div class="text-danger">Это поле необходимо заполнить</div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <label>Регион</label>
+            <input type="text" class="form-control" name="region"
+                   value="{{ $client->region }}">
+            @error('region')
+            <div class="text-danger">Это поле необходимо заполнить</div>
             @enderror
         </div>
         <input type="submit" class="btn btn-primary" value="Обновить">

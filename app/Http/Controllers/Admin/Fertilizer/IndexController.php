@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin\Fertilizer;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Fertilizer;
 
 class IndexController extends Controller
 {
 
     public function __invoke()
     {
+        $fertilizers = Fertilizer::all();
 
-        return view('admin.fertilizer.index');
+        return view('admin.fertilizer.index', compact('fertilizers'));
     }
 }

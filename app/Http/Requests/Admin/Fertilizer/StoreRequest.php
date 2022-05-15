@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Clients;
+namespace App\Http\Requests\Admin\Fertilizer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -25,9 +25,14 @@ class StoreRequest extends FormRequest
     {
         return [
          'name'=>'required|string',
-           'agreement_date'=> 'required|date',
-            'delivery_cost' => 'required|',
-            'region' => 'required|string'
+           'nitrogen_rate'=> 'required|',
+           'phosphorus_rate'=> 'required|',
+           'potassium_rate'=> 'required|',
+            'culture_group_id' => 'required|integer',
+            'district' => 'required|string',
+            'price' => 'required|',
+            'description' => 'required|string',
+            'destination' => 'required|string',
         ];
     }
 }

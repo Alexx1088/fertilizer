@@ -32,7 +32,7 @@
             </div>
             <div class="row"
 <div >
-    <div class="card col-6">
+    <div class="card col-9">
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0" style="height: 300px;">
             <table class="table table-head-fixed text-nowrap">
@@ -41,6 +41,8 @@
                     <th>ID</th>
                     <th>Название</th>
                     <th>Дата договора</th>
+                    <th>Стоимость доставки</th>
+                    <th>регион</th>
                     <th colspan="2" class="text-center">Действие</th>
                  </tr>
                 </thead>
@@ -50,6 +52,8 @@
                     <td>{{ $client->id }}</td>
                     <td>{{ $client->name }}</td>
                     <td>{{ $client->agreement_date}}</td>
+                        <td>{{ $client->delivery_cost}}</td>
+                        <td>{{ $client->region}}</td>
                     <td><a href="{{ route('admin.clients.show', $client->id) }}"><i class="far fa-eye"></i></a></td>
                     <td><a href="{{ route('admin.clients.edit', $client->id) }}"
                            class="text-success"><i class="fas fa-pencil-alt"></i></a></td>

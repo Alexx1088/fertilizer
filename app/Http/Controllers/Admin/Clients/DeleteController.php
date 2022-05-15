@@ -10,9 +10,8 @@ class DeleteController extends Controller
 
     public function __invoke( Client $client)
     {
+               $client->delete();
 
-        $client->delete();
-
-        return redirect()->route('admin.client.index');
+        return redirect()->route('admin.clients.index');
     }
 }

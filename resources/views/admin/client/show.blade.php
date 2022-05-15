@@ -28,7 +28,7 @@
 
             <div class="row"
 <div >
-    <div class="card col-4">
+    <div class="card col-9">
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0 " style="height: 300px;">
             <table class="table table-head-fixed text-nowrap">
@@ -36,18 +36,25 @@
                 <tbody>
 
                 <tr>
-                    <td>ID</td>
-                    <td>Название</td>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Дата договора</th>
+                    <th>Стоимость поставки</th>
+                    <th>Регион</th>
+                    <th class="text-center">Действие</th>
 
                 </tr>
 
                 <tr>
                     <td>{{ $client->id }}</td>
                     <td >{{ $client->name }}</td>
-                    <td ><a href="{{ route('admin.culture.edit', $client->id) }}" class="text-success" >
+                    <td >{{ $client->agreement_date }}</td>
+                    <td >{{ $client->delivery_cost }}</td>
+                    <td >{{ $client->region }}</td>
+                    <td ><a href="{{ route('admin.clients.edit', $client->id) }}" class="text-success" >
                             <i class="fas fa-pencil-alt" ></i></a></td>
                     <td>
-                        <form action="{{route('admin.culture.delete', $client->id)}}"
+                        <form action="{{route('admin.clients.delete', $client->id)}}"
                               method = "POST">
                             @csrf
                             @method('DELETE')

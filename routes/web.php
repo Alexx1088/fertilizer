@@ -47,6 +47,12 @@ Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
         Route::group([ 'namespace' => 'Fertilizer', 'prefix' => 'fertilizer'], function () {
 
             Route::get('/', 'IndexController')->name('admin.fertilizer.index');
+            Route::get('/create', 'CreateController')->name('admin.fertilizer.create');
+            Route::post('/', 'StoreController')->name('admin.fertilizer.store');
+            Route::get('/{fertilizer}', 'ShowController')->name('admin.fertilizer.show');
+            Route::get('/{fertilizer}/edit', 'EditController')->name('admin.fertilizer.edit');
+            Route::patch('/{fertilizer}', 'UpdateController')->name('admin.fertilizer.update');
+            Route::delete('/{fertilizer}', 'DeleteController')->name('admin.fertilizer.delete');
         });
 
         Route::group([ 'namespace' => 'Culture', 'prefix' => 'cultures'],

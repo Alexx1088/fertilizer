@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Удобрения</h1>
+                    <h1 class="m-0">{{ $fertilizer->name }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,18 +25,13 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-1 mb-3">
-                    <a href="{{ route('admin.fertilizer.create') }}" class="btn btn-block btn-primary">Добавить</a>
-                </div>
-            </div>
             <div class="row"
-<div {{--class="card col-12"--}}>
-    <div class="card col-12">
+<div>
+    <div class="card col-9">
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0" style="height: 300px;">
+        <div class="card-body table-responsive p-0 " style="height: 300px;">
             <table class="table table-head-fixed text-nowrap">
-                <thead>
+                <tbody>
                 <tr>
                     <th>ID</th>
                     <th>Название</th>
@@ -49,37 +44,32 @@
                     <th>описание</th>
                     <th>назначение</th>
                     <th colspan="2" class="text-center">Действие</th>
-                 </tr>
-                </thead>
-                <tbody>
-                @foreach($fertilizers as $fertilizer)
-                    <tr>
+                </tr>
+                <tr>
                     <td>{{ $fertilizer->id }}</td>
                     <td>{{ $fertilizer->name }}</td>
                     <td>{{ $fertilizer->nitrogen_rate}}</td>
-                        <td>{{ $fertilizer->phosphorus_rate}}</td>
-                        <td>{{ $fertilizer->potassium_rate}}</td>
-                        <td>{{ $fertilizer->culture_group_id}}</td>
-                        <td>{{ $fertilizer->district}}</td>
-                        <td>{{ $fertilizer->price}}</td>
-                        <td>{{ $fertilizer->description}}</td>
-                        <td>{{ $fertilizer->destination}}</td>
-                    <td><a href="{{ route('admin.fertilizer.show', $fertilizer->id) }}"><i class="far fa-eye"></i></a></td>
-                    <td><a href="{{ route('admin.fertilizer.edit', $fertilizer->id) }}"
-                           class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
-
-                    <td >
-                           <form action="{{route('admin.fertilizer.delete', $fertilizer->id)}}"
-                       method = "POST">
+                    <td>{{ $fertilizer->phosphorus_rate}}</td>
+                    <td>{{ $fertilizer->potassium_rate}}</td>
+                    <td>{{ $fertilizer->culture_group_id}}</td>
+                    <td>{{ $fertilizer->district}}</td>
+                    <td>{{ $fertilizer->price}}</td>
+                    <td>{{ $fertilizer->description}}</td>
+                    <td>{{ $fertilizer->destination}}</td>
+                    <td ><a href="{{ route('admin.fertilizer.edit', $fertilizer->id) }}" class="text-success" >
+                            <i class="fas fa-pencil-alt" ></i></a></td>
+                    <td>
+                        <form action="{{route('admin.fertilizer.delete', $fertilizer->id)}}"
+                              method = "POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit"  class="border-0 bg-transparent">
-                        <i class="fas fa-trash text-danger" ></i>
+                                <i class="fas fa-trash text-danger" ></i>
                             </button>
                         </form>
                     </td>
-                                 </tr>
-                @endforeach
+                 </tr>
+
                    </tbody>
             </table>
         </div>

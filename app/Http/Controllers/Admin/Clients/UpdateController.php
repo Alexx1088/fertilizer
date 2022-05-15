@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Clients;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Culture\UpdateRequest;
+use App\Http\Requests\Admin\Clients\UpdateRequest;
 use App\Models\Client;
 
 class UpdateController extends Controller
