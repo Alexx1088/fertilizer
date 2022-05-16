@@ -16,8 +16,8 @@ use App\Http\Controllers\Admin\Clients\IndexController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-/*Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
+/*
+Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
 
     Route::get('/', IndexController::class);
 
@@ -70,9 +70,33 @@ Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
 
     });
 
+Route::group(['namespace' => 'App\Http\Controllers\Fertilizer', 'prefix' => 'fertilizer'],
+    function () {
 
+                Route::get('/', 'IndexController')->name('fertilizer.index');
+                Route::get('/create', 'CreateController')->name('fertilizer.create');
+                Route::post('/', 'StoreController')->name('fertilizer.store');
+                Route::get('/{fertilizer}', 'ShowController')->name('fertilizer.show');
+                Route::get('/{fertilizer}/edit', 'EditController')->name('fertilizer.edit');
+                Route::patch('/{fertilizer}', 'UpdateController')->name('fertilizer.update');
+                Route::delete('/{fertilizer}', 'DeleteController')->name('fertilizer.delete');
 
+            });
 
+Route::group([ 'namespace' => 'App\Http\Controllers\Admin\User', 'prefix' => 'users'],
+    function () {
+
+        Route::get('/', 'IndexController')->name('admin.user.index');
+        Route::get('/create', 'CreateController')->name('admin.user.create');
+        Route::post('/', 'StoreController')->name('admin.user.store');
+        Route::get('/{user}', 'ShowController')->name('admin.user.show');
+        Route::get('/{user}/edit', 'EditController')->name('admin.user.edit');
+        Route::patch('/{user}', 'UpdateController')->name('admin.user.update');
+        Route::delete('/{user}', 'DeleteController')->name('admin.user.delete');
+
+    });
+
+/*
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');*/
