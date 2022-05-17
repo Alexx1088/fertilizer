@@ -13,6 +13,8 @@ class IndexController extends Controller
 
         $users = User::all();
 
-        return view('admin.user.index', compact('users'));
+        $deleted_users = User::onlyTrashed()->get();
+
+        return view('admin.user.index', compact('users', 'deleted_users'));
     }
 }

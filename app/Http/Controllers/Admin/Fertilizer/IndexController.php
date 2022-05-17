@@ -12,6 +12,9 @@ class IndexController extends Controller
     {
         $fertilizers = Fertilizer::all();
 
-        return view('admin.fertilizer.index', compact('fertilizers'));
+        $deleted_fertilizers = Fertilizer::onlyTrashed()->get();
+
+             return view('admin.fertilizer.index',
+                 compact('fertilizers', 'deleted_fertilizers'));
     }
 }
