@@ -13,6 +13,8 @@ class IndexController extends Controller
     {
         $clients = Client::all();
 
-        return view('admin.client.index', compact('clients'));
+        $deleted_clients = Client::onlyTrashed()->get();
+
+        return view('admin.client.index', compact('clients', 'deleted_clients'));
     }
 }

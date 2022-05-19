@@ -69,6 +69,34 @@
         </div>
         <!-- /.card-body -->
     </div>
+
+
+    </div>
+            </div>
+        <div class="col-sm-6 mt-3" style="max-width: 510px; width: 100%">
+            <h4 class="m-0">Удобрения, удаленные из таблицы культур:</h4>
+        </div><!-- /.col -->
+        <div class="row" style="max-width: 510px; width: 100%;">
+            <div class="card col-12 mt-3">
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0 " style="height: 300px; ">
+                    <table class="table table-head-fixed text-nowrap ">
+                        <thead>
+                        <tr>
+                            <th style="width: 10%">ID</th>
+                            <th>Название</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($deleted_cultures as $deleted_culture)
+                            <tr>
+                                <td>{{ $deleted_culture->id }}</td>
+                                <td>{{ $deleted_culture->name }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
              </div>
             <!-- /.row -->

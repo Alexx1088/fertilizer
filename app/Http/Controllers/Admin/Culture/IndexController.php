@@ -13,6 +13,8 @@ class IndexController extends Controller
 
         $cultures = Culture::all();
 
-        return view('admin.culture.index', compact('cultures'));
+        $deleted_cultures = Culture::onlyTrashed()->get();
+
+        return view('admin.culture.index', compact('cultures', 'deleted_cultures'));
     }
 }

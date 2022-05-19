@@ -73,13 +73,35 @@
                    </tbody>
             </table>
         </div>
+
         <!-- /.card-body -->
+    </div>
+    <div >
+           <h4 class="m-0 mb-4 mt-5" >Клиенты, удаленные из таблицы клиентов:</h4>
+    <div class="card-body table-responsive p-0 col-6 " style="max-width: 510px; width: 100%"; ">
+        <table class="table table-head-fixed text-nowrap ">
+            <thead>
+            <tr>
+                <th style="width: 10%">ID</th>
+                <th>Имя</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($deleted_clients as $deleted_client)
+                <tr>
+                    <td>{{ $deleted_client->id }}</td>
+                    <td>{{ $deleted_client->name }}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
             </div>
              </div>
             <!-- /.row -->
 
-        </div><!-- /.container-fluid -->
+     {{--   </div><!-- /.container-fluid -->--}}
+
     </section>
     <!-- /.content -->
 </div>

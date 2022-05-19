@@ -30,82 +30,55 @@
                         <a href="{{ route('admin.fertilizer.create') }}" class="btn btn-block btn-primary">Добавить</a>
                     </div>
                 </div>
-                <div class="row"
-                <div {{--class="card col-12"--}}>
-                    <div class="card col-12">
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive p-0" style="height: 300px;">
-                            <table class="table table-head-fixed text-nowrap">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Название</th>
-                                    <th>Норма азота</th>
-                                    <th>Норма фосфор</th>
-                                    <th>Норма калий</th>
-                                    <th>Группа культур</th>
-                                    <th>район</th>
-                                    <th>стоимость</th>
-                                    <th>описание</th>
-                                    <th>назначение</th>
-                                    <th colspan="2" class="text-center">Действие</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($fertilizers as $fertilizer)
-                                    <tr>
-                                        <td>{{ $fertilizer->id }}</td>
-                                        <td>{{ $fertilizer->name }}</td>
-                                        <td>{{ $fertilizer->nitrogen_rate}}</td>
-                                        <td>{{ $fertilizer->phosphorus_rate}}</td>
-                                        <td>{{ $fertilizer->potassium_rate}}</td>
-                                        <td>{{ $fertilizer->culture_group_id}}</td>
-                                        <td>{{ $fertilizer->district}}</td>
-                                        <td>{{ $fertilizer->price}}</td>
-                                        <td>{{ $fertilizer->description}}</td>
-                                        <td>{{ $fertilizer->destination}}</td>
-                                        <td><a href="{{ route('admin.fertilizer.show', $fertilizer->id) }}"><i
-                                                        class="far fa-eye"></i></a></td>
-                                        <td><a href="{{ route('admin.fertilizer.edit', $fertilizer->id) }}"
-                                               class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
-
-                                        <td>
-                                            <form action="{{route('admin.fertilizer.delete', $fertilizer->id)}}"
-                                                  method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="border-0 bg-transparent">
-                                                    <i class="fas fa-trash text-danger"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <div class="col-sm-12 mt-3">
-                        <h4 class="m-0">Удобрения, удаленные из таблицы удобрений:</h4>
-                    </div><!-- /.col -->
-                    <div class="row"
-                    <div>
-                        <div class="card col-12 mt-3">
+                <div class="row">
+                    <div {{--class="card col-12"--}}>
+                        <div class="card col-12">
                             <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0 " style="height: 300px; ">
-                                <table class="table table-head-fixed text-nowrap ">
+                            <div class="card-body table-responsive p-0" style="height: 300px;">
+                                <table class="table table-head-fixed text-nowrap">
                                     <thead>
                                     <tr>
-                                        <th >ID</th>
-                                        <th >Название</th>
+                                        <th>ID</th>
+                                        <th>Название</th>
+                                        <th>Норма азота</th>
+                                        <th>Норма фосфор</th>
+                                        <th>Норма калий</th>
+                                        <th>Группа культур</th>
+                                        <th>район</th>
+                                        <th>стоимость</th>
+                                        <th>описание</th>
+                                        <th>назначение</th>
+                                        <th colspan="2" class="text-center">Действие</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($deleted_fertilizers as $deleted_fertilizer)
+                                    @foreach($fertilizers as $fertilizer)
                                         <tr>
-                                            <td>{{ $deleted_fertilizer->id }}</td>
-                                            <td>{{ $deleted_fertilizer->name }}</td>
+                                            <td>{{ $fertilizer->id }}</td>
+                                            <td>{{ $fertilizer->name }}</td>
+                                            <td>{{ $fertilizer->nitrogen_rate}}</td>
+                                            <td>{{ $fertilizer->phosphorus_rate}}</td>
+                                            <td>{{ $fertilizer->potassium_rate}}</td>
+                                            <td>{{ $fertilizer->culture_group_id}}</td>
+                                            <td>{{ $fertilizer->district}}</td>
+                                            <td>{{ $fertilizer->price}}</td>
+                                            <td>{{ $fertilizer->description}}</td>
+                                            <td>{{ $fertilizer->destination}}</td>
+                                            <td><a href="{{ route('admin.fertilizer.show', $fertilizer->id) }}"><i
+                                                        class="far fa-eye"></i></a></td>
+                                            <td><a href="{{ route('admin.fertilizer.edit', $fertilizer->id) }}"
+                                                   class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
+
+                                            <td>
+                                                <form action="{{route('admin.fertilizer.delete', $fertilizer->id)}}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent">
+                                                        <i class="fas fa-trash text-danger"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -113,16 +86,36 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-
-
+                        <div class="col-sm-6 mt-3" style="max-width: 510px; width: 100%">
+                            <h4 class="m-0">Удобрения, удаленные из таблицы удобрений:</h4>
+                        </div><!-- /.col -->
+                        <div class="row" style="max-width: 510px; width: 100%;">
+                            <div class="card col-12 mt-3">
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0 " style="height: 300px; ">
+                                    <table class="table table-head-fixed text-nowrap ">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 10%">ID</th>
+                                            <th>Название</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($deleted_fertilizers as $deleted_fertilizer)
+                                            <tr>
+                                                <td>{{ $deleted_fertilizer->id }}</td>
+                                                <td>{{ $deleted_fertilizer->name }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- /.row -->
-
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
 
 @endsection
