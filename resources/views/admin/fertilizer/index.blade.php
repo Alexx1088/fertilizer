@@ -65,7 +65,7 @@
                                             <td>{{ $fertilizer->description}}</td>
                                             <td>{{ $fertilizer->destination}}</td>
                                             <td><a href="{{ route('admin.fertilizer.show', $fertilizer->id) }}"><i
-                                                        class="far fa-eye"></i></a></td>
+                                                            class="far fa-eye"></i></a></td>
                                             <td><a href="{{ route('admin.fertilizer.edit', $fertilizer->id) }}"
                                                    class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
 
