@@ -19,7 +19,7 @@ class IndexController extends Controller
 
         $fertilizers1 = Fertilizer::filter($filter)->get();
 
-    //       dd($fertilizers1);
+       //   dd($fertilizers1);
 
         $fertilizers = Fertilizer::all();
 

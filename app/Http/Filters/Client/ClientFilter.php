@@ -26,67 +26,23 @@ class ClientFilter extends abstractFilter
 
     }
 
-    public function name(Builder $builder, $value)
+   public function name(Builder $builder, $value)
     {
-
         $builder->where('name', 'like', "%{$value}%");
-
     }
 
-    public function agreement_date(Builder $builder, $value)
+   public function agreement_date(Builder $builder, $dateFrom=2010, $dateTo=2020)
     {
-
-        $dateFrom = 2022;
-        $builder->where('agreement_date', '>', $dateFrom);
-        $dateTo = 2021;
-        $builder->where('agreement_date', '<', $dateTo);
+        return $builder->whereBetween('agreement_date', [$dateFrom, $dateTo]);
     }
 
-   public function delivery_cost(Builder $builder, $value)
+    public function delivery_cost(Builder $builder, $priceFrom=0, $priceTo=500)
     {
-        $costFrom =0;
-        $builder->where('delivery_cost', '<', $costFrom) ;
+        return $builder->whereBetween('delivery_cost', [$priceFrom, $priceTo]);
     }
 
-  /*  public function potassium_rate(Builder $builder, $value)
+    public function region(Builder $builder, $arr=['Омск','Прага', 'Курск'] )
     {
-
-        $builder->where('potassium_rate', 'like', "%{$value}%");
-
+        $builder->whereIn('region', ['Омск','Прага', 'Курск']);
     }
-
-    public function culture_group_id(Builder $builder, $value)
-    {
-
-        $builder->where('culture_group_id', 'like', "%{$value}%");
-
-    }
-
-    public function district(Builder $builder, $value)
-    {
-
-        $builder->where('district', 'like', "%{$value}%");
-
-    }
-
-    public function price(Builder $builder, $value)
-    {
-
-        $builder->where('price', 'like', "%{$value}%");
-
-    }
-
-    public function description(Builder $builder, $value)
-    {
-
-        $builder->where('description', 'like', "%{$value}%");
-
-    }
-
-    public function destination(Builder $builder, $value)
-    {
-
-        $builder->where('destination', 'like', "%{$value}%");
-
-    }*/
 }

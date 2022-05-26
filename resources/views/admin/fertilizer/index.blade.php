@@ -60,7 +60,18 @@
                                             <td>{{ $fertilizer->phosphorus_rate}}</td>
                                             <td>{{ $fertilizer->potassium_rate}}</td>
                                             <td>{{ $fertilizer->culture_group_id}}</td>
-                                            <td>{{ $fertilizer->district}}</td>
+                                            {{--  <td>{{ $fertilizer->district}}</td>--}}
+                                            <td>
+                                                <div class="form-group">
+                                                    <label>Выберите район</label>
+                                                    <select name="new">
+                                                        <option value="Первый">Первый</option>
+                                                        <option value="Второй">Второй</option>
+                                                    </select>
+
+
+                                                </div>
+                                            </td>
                                             <td>{{ $fertilizer->price}}</td>
                                             <td>{{ $fertilizer->description}}</td>
                                             <td>{{ $fertilizer->destination}}</td>

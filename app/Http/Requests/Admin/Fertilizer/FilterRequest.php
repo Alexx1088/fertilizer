@@ -24,13 +24,17 @@ class FilterRequest extends FormRequest
     public function rules()
     {
         return [
-         'name'=>'|string',
-           'nitrogen_rate'=> '|',
-           'phosphorus_rate'=> '|',
-           'potassium_rate'=> '|',
+            'name' => '|string',
+            'nitrogen_rate_from' => '',
+            'nitrogen_rate_to' => '',
+            'phosphorus_rate_from' => '|',
+            'phosphorus_rate_to' => '|',
+            'potassium_rate_from' => '|',
+            'potassium_rate_to' => '|',
             'culture_group_id' => '|integer',
             'district' => '|string',
-            'price' => '|',
+            'price_from' => '|',
+            'price_to' => '|',
             'description' => '|string',
             'destination' => '|string',
         ];
