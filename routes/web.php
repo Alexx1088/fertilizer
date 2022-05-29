@@ -53,6 +53,7 @@ Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
             Route::get('/{fertilizer}/edit', 'EditController')->name('admin.fertilizer.edit');
             Route::patch('/{fertilizer}', 'UpdateController')->name('admin.fertilizer.update');
             Route::delete('/{fertilizer}', 'DeleteController')->name('admin.fertilizer.delete');
+
         });
 
         Route::group([ 'namespace' => 'Culture', 'prefix' => 'cultures'],
@@ -81,7 +82,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Fertilizer', 'prefix' => 'fer
                 Route::patch('/{fertilizer}', 'UpdateController')->name('fertilizer.update');
                 Route::delete('/{fertilizer}', 'DeleteController')->name('fertilizer.delete');
 
-            });
+    });
 
 Route::group([ 'namespace' => 'App\Http\Controllers\Admin\User', 'prefix' => 'users'],
     function () {
@@ -96,7 +97,7 @@ Route::group([ 'namespace' => 'App\Http\Controllers\Admin\User', 'prefix' => 'us
 
     });
 
-/*
+ /*
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');*/

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Clients;
 
 use App\Http\Controllers\Controller;
-use App\Http\Filters\Client\ClientFilter;
+use App\Http\Filters\ClientFilter;
 use App\Http\Requests\Admin\Clients\FilterRequest;
 use App\Models\Client;
 

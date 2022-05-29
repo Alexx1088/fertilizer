@@ -37,6 +37,8 @@ class FilterRequest extends FormRequest
             'price_to' => '|',
             'description' => '|string',
             'destination' => '|string',
+            'districts' =>'',
+
         ];
     }
 }

@@ -60,18 +60,7 @@
                                             <td>{{ $fertilizer->phosphorus_rate}}</td>
                                             <td>{{ $fertilizer->potassium_rate}}</td>
                                             <td>{{ $fertilizer->culture_group_id}}</td>
-                                            {{--  <td>{{ $fertilizer->district}}</td>--}}
-                                            <td>
-                                                <div class="form-group">
-                                                    <label>Выберите район</label>
-                                                    <select name="new">
-                                                        <option value="Первый">Первый</option>
-                                                        <option value="Второй">Второй</option>
-                                                    </select>
-
-
-                                                </div>
-                                            </td>
+                                            <td>{{ $fertilizer->district}}</td>
                                             <td>{{ $fertilizer->price}}</td>
                                             <td>{{ $fertilizer->description}}</td>
                                             <td>{{ $fertilizer->destination}}</td>
@@ -97,11 +86,14 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <div class="col-sm-6 mt-3" style="max-width: 510px; width: 100%">
+                        <div class="col-sm-6 mt-3 " style="max-width: 510px; width: 100%">
                             <h4 class="m-0">Удобрения, удаленные из таблицы удобрений:</h4>
                         </div><!-- /.col -->
                         <div class="row" style="max-width: 510px; width: 100%;">
-                            <div class="card col-12 mt-3">
+
+                            <div class="d-flex" >
+
+                            <div class="card col-12 mt-3 " style="margin-right: 250px; ">
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0 " style="height: 300px; ">
                                     <table class="table table-head-fixed text-nowrap ">
@@ -122,6 +114,25 @@
                                     </table>
                                 </div>
                             </div>
+
+                            <div class="card col-4 ml-3-3 mt-3">
+                                <form action="{{route('admin.fertilizer.index')}}" method="post">
+                                    @csrf
+                                    <label>Поиск района</label>
+                                    <select multiple ="multiple"  name="districts[]" class="select2">
+                                        @foreach($districts as $district)
+                                            <option value="{{$district->id}}">{{$district->district}}</option>
+                                        @endforeach
+                                    </select>
+                                    <button type="submit" class="btn btn-block btn-primary mt-3" >
+                                        Поиск
+                                    </button>
+                                </form>
+
+                            </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,6 @@ class ShowController extends Controller
 
     public function __invoke(Fertilizer $fertilizer)
     {
-              return view('admin.fertilizer.show', compact('fertilizer'));
+                  return view('admin.fertilizer.show', compact('fertilizer'));
     }
 }
