@@ -6,7 +6,7 @@ namespace App\Http\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class ClientFilter extends abstractFilter
+class ClientFilter extends AbstractFilter
 {
     public const NAME = 'name';
     public const AGREEMENT_DATE_FROM = 'agreement_date_from';
