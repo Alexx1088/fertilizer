@@ -18,7 +18,7 @@ class IndexController extends Controller
 
         $clients = Client::filter($filter)->get();
 
-        dd($clients);
+      //  dd($clients);
 
 
         $clients = Client::all();
