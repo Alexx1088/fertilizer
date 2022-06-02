@@ -14,10 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::table('fertilizers', function (Blueprint $table) {
-            $table->float('nitrogen_rate')->change();
-            $table->float('phosphorus_rate')->change();
-            $table->float('potassium_rate')->change();
-            $table->float('price')->change();
             $table->softDeletes();
         });
     }
@@ -30,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('fertilizers', function (Blueprint $table) {
-          $table->dropSoftDeletes();
+            $table->dropSoftDeletes();
         });
     }
 };

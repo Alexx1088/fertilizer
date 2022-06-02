@@ -25,6 +25,11 @@ return new class extends Migration
             $table->string('description');
             $table->string('destination');
             $table->timestamps();
+
+            $table->index('culture_group', 'fertilizer_culture_group_idx');
+
+            $table->foreign('culture_group', 'fertilizer_culture_group_fk')
+                ->on('cultures')->references('id');
         });
     }
 
