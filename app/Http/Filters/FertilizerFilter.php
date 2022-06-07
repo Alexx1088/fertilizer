@@ -15,7 +15,7 @@ class FertilizerFilter extends AbstractFilter
     public const PHOSPHORUS_RATE_TO = 'phosphorus_rate_to';
     public const POTASSIUM_RATE_FROM = 'potassium_rate_from';
     public const POTASSIUM_RATE_TO = 'potassium_rate_to';
-    public const CULTURE_GROUP_ID = 'culture_group_id';
+    public const CULTURE_GROUP_IDS = 'culture_group_ids';
     public const DISTRICTS = 'districts';
     public const PRICE_FROM = 'price_from';
     public const PRICE_TO = 'price_to';
@@ -34,7 +34,7 @@ class FertilizerFilter extends AbstractFilter
             self::PHOSPHORUS_RATE_TO => [$this, 'phosphorus_rate_to'],
             self::POTASSIUM_RATE_FROM => [$this, 'potassium_rate_from'],
             self::POTASSIUM_RATE_TO => [$this, 'potassium_rate_to'],
-            self::CULTURE_GROUP_ID => [$this, 'culture_group_id'],
+            self::CULTURE_GROUP_IDS => [$this, 'culture_group_ids'],
             self::DISTRICTS => [$this, 'districts'],
             self::PRICE_FROM => [$this, 'price_from'],
             self::PRICE_TO => [$this, 'price_to'],
@@ -84,17 +84,17 @@ class FertilizerFilter extends AbstractFilter
         $builder->where('potassium_rate', '<', $potassium_rate_to);
 
     }
-      public function culture_group_id(Builder $builder, $value)
+      public function culture_group_ids(Builder $builder, $value)
       {
 
-          $builder->where('culture_group_id', 'like', "%{$value}%");
+          $builder->where('culture_group_id', 'like', $value);
 
       }
 
       public function districts(Builder $builder, $value)
       {
 
-          $builder->where('district', '', $value);
+          $builder->where('district', 'like', $value);
 
       }
 

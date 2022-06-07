@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\Admin\Fertilizer\SelectController;
 use App\Http\Controllers\Main\IndexController2;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Culture\IndexController3;
@@ -53,6 +54,8 @@ Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
             Route::get('/{fertilizer}/edit', 'EditController')->name('admin.fertilizer.edit');
             Route::patch('/{fertilizer}', 'UpdateController')->name('admin.fertilizer.update');
             Route::delete('/{fertilizer}', 'DeleteController')->name('admin.fertilizer.delete');
+
+            Route::get('/select', [SelectController::class, 'index'])->name('admin.fertilizer.select');
 
         });
 

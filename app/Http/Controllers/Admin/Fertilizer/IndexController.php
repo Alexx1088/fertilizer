@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Filters\FertilizerFilter;
 use App\Http\Requests\Admin\Fertilizer\FilterRequest;
 use App\Models\Fertilizer;
-use Illuminate\Support\Facades\Request;
-use function Doctrine\Common\Cache\Psr6\get;
 
 class IndexController extends Controller
 {
@@ -15,13 +13,11 @@ class IndexController extends Controller
     public function __invoke(FilterRequest $request)
     {
        $data = $request->validated();
-
-        $filter = app()->make(FertilizerFilter::class, ['queryParams' => array_filter
+      //  dd($data);
+         $filter = app()->make(FertilizerFilter::class, ['queryParams' => array_filter
         ($data)]);
 
-        $fertilizers1 = Fertilizer::filter($filter)->get();
-
-     // dd($fertilizers1);
+           $fertilizers_search = Fertilizer::filter($filter)->get();
 
         $fertilizers = Fertilizer::all();
 
@@ -29,7 +25,10 @@ class IndexController extends Controller
 
         $districts = Fertilizer::all('district');
 
+       //      $cultures_groups = Fertilizer::all('culture_group_id', 'id');
+
              return view('admin.fertilizer.index',
-                 compact('fertilizers', 'deleted_fertilizers', 'districts'));
+                 compact('fertilizers', 'deleted_fertilizers', 'districts',
+                     'fertilizers_search', 'data', ));
     }
 }
