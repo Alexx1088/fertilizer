@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Удобрения</h1>
+                        <h1 class="m-0 text-center">Удобрения</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -26,13 +26,12 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-1 mb-3">
+                    <div class="col-3 mb-3 ml-5">
                         <a href="{{ route('admin.fertilizer.create') }}" class="btn btn-block btn-primary">Добавить</a>
                     </div>
                 </div>
                 <div class="row">
-                    <div {{--class="card col-12"--}}>
-                        <div class="card col-12">
+                                          <div class="card col-12 ml-5">
                             <!-- /.card-header -->
                             <div class="card-body table-responsive p-0" style="height: 300px;">
                                 <table class="table table-head-fixed text-nowrap">
@@ -86,14 +85,14 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <div class="col-sm-6 mt-3 " style="max-width: 510px; width: 100%">
-                            <h4 class="m-0">Удобрения, удаленные из таблицы удобрений:</h4>
+                        <div class="col-12 mt-3 ml-3 mb-1 " style="max-width: 910px;
+                        width: 900px; height: 40px"; >
+                            <h4 class="m-0 text-center">Удобрения, удаленные из таблицы удобрений:</h4>
                         </div><!-- /.col -->
                         <div class="row" style="max-width: 510px; width: 100%;">
 
-                            <div class="d-flex">
-
-                                <div class="card col-12 mt-3 " style="margin-right: 250px; ">
+                            <div class="ml-5 col-9 ">
+                                <div class="card col-12 mt-3 " style="margin-right: 5px;  ">
                                     <!-- /.card-header -->
                                     <div class="card-body table-responsive p-0 " style="height: 300px; ">
                                         <table class="table table-head-fixed text-nowrap ">
@@ -115,446 +114,421 @@
                                     </div>
                                 </div>
 
-                                <div class="card col-4 ml-3-3 mt-3">
-                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                          enctype="multipart/form-data">
-                                        @csrf
-                                        @method('get')
-                                        <label for="districts">Поиск района</label>
-                                        <select multiple="multiple" name="districts[]" id="districts"
-                                                class="form-control">
-                                            @foreach($districts as $district)
-                                                <option value="{{$district->id}}">{{$district->district}}</option>
-                                            @endforeach
-                                        </select>
-                                        <button type="submit" class="btn btn-block btn-primary mt-3">
-                                            Поиск
-                                        </button>
-                                    </form>
+                            </div>
+                            <div class="mt-3" >
+                                <h4 class="mb-3" style="margin-left:280px "> Фильтр по удобрениям:</h4>
 
+                                <div class="row d-flex flex-row ml-5" style="width:900px">
+
+                                <div class="col-3 " style="border: 1px solid darkred; margin: 5px">
+                                    <div class="form-group mr-3">
+                                        <form action="{{ route('admin.fertilizer.index') }}" method="post">
+                                            @csrf
+                                            @method('get')
+                                            <label>Группа культур</label>
+
+                                            <select multiple class="form-control" name="culture_group_ids[]">
+                                                @foreach($fertilizers as $fertilizer )
+                                                    {{--  <option value="{{$district->id}}">{{$district->district}}</option>--}}
+                                                    <option value="{{$fertilizer->id}}">{{$fertilizer->culture_group_id}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            {{--  </label>--}}
+                                            <button type="submit" class="btn btn-block btn-primary mt-3">
+                                                Поиск
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="card col-12">
+                                        <!-- /.card-header -->
+                                        <div class="card-body table-responsive p-1 "
+                                             style="height: 150px; width: 200px;">
+                                            <table class="table table-head-fixed text-nowrap">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="5">ID удобрения</th>
+                                                </tr>
+                                                <tr>
+                                                    @if(isset($culture_group_ids))
+                                                        @foreach($culture_group_ids as $culture_group_id)
+                                                            <td>{{ $culture_group_id }}</td>
+                                                        @endforeach
+                                                    @else
+                                                        <td></td>
+                                                    @endif
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
                                 </div>
 
-                                {{--     <div class="card col-4 ml-3-3 mt-3">--}}
-                                {{--<div class="form-group mr-3">--}}
-                                {{--<form action="{{route('admin.fertilizer.index')}}" method="post">
-                                    @csrf
-                                    @method('get')
-                                    <label for="districts">Поиск района</label>
-                                    <select multiple="multiple" name="districts[]" id="districts" class="form-control">
-                                        @foreach($districts as $district)
-                                            <option
-                                        @if(isset($data['districts']))
-                                        @foreach($districts as $district_id)
-                                            {{ $district_id == $district->id ? 'selected' : '' }}
-                                            <option value="{{$district->id}}">{{$district->district}}</option>
-                                        @endforeach
-                                        @endif
-                                        value="{{ $district->id }}"> {{$district->district}}</option>
-                                        @endforeach
-                                    </select>
-                                    <button type="submit" class="btn btn-block btn-primary mt-3">
-                                        Поиск
-                                    </button>
-                                </form>--}}
-                          {{--  </div>--}}
+                                <div class="col-3 " style="border: 1px solid darkred; margin: 5px">
+                                    <div class="form-group mr-3">
+                                        <form action="{{ route('admin.fertilizer.index') }}" method="post">
+                                            @csrf
+                                            @method('get')
+                                            <label>Поиск района</label>
+                                            <select multiple class="form-control" name="districts[]">
+                                                @foreach($fertilizers as $fertilizer )
+                                                    {{--  <option value="{{$district->id}}">{{$district->district}}</option>--}}
+                                                    <option value="{{$fertilizer->id}}">{{$fertilizer->district}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <button type="submit" class="btn btn-block btn-primary mt-3">
+                                                Поиск
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="card col-12">
+                                        <!-- /.card-header -->
+                                        <div class="card-body table-responsive p-1 "
+                                             style="height: 150px; width: 200px;">
+                                            <table class="table table-head-fixed text-nowrap">
+                                                <tbody>
+                                                <tr>
+                                                    <th width="5">ID района</th>
+                                                </tr>
+                                                <tr>
+                                                    @if(isset($districts))
+                                                        @foreach($districts as $district)
+                                                            <td>{{ $district }}</td>
+                                                        @endforeach
+                                                    @else
+                                                        <td></td>
+                                                    @endif
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
 
-                            <div class="form-group mr-3">
-                                <form action="{{ route('admin.fertilizer.index') }}" method="post">
-                                    @csrf
-                                    @method('get')
-                                    {{-- <label>Группа культур</label>--}}
-                                    <label>Группа культур
-                                        <select multiple class="form-control" name="culture_group_ids[]">
-                                            @foreach($fertilizers as $fertilizer )
-                                                {{--  <option value="{{$district->id}}">{{$district->district}}</option>--}}
-                                                <option  value="{{$fertilizer->id}}">{{$fertilizer->culture_group_id}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </label>
-                                    <button type="submit" class="btn btn-block btn-primary mt-3">
-                                        Поиск
-                                    </button>
-                                </form>
+                                <div class="col-3" style="border: 1px solid darkred; margin: 5px">
+                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
+                                          class="w-65" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('get')
+                                        <div class="form-group ">
+                                            <label>наименование</label>
+                                            <input type="text" class="form-control" name="name"
+                                                   placeholder="Наименование удобрения">
+                                        </div>
+                                        <div class="card col-12" style="height:200px">
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-1 "
+                                                 style="height: 150px; width: 200px;">
+                                                <table class="table table-head-fixed text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Название</th>
+                                                    </tr>
+                                                    <tr>
+                                                        @if(isset($data['name']))
+                                                            @foreach($fertilizers_search as $fertilizer_search)
+                                                                <td>{{ $fertilizer_search->id }}</td>
+                                                                <td>{{ $fertilizer_search->name }}</td>
+                                                            @endforeach
+                                                        @else
+                                                            <td></td>
+                                                        @endif
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                                <div class="col-3 " style="border: 1px solid darkred; margin: 5px">
+                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
+                                          class="w-65" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('get')
+                                        <div class="form-group ">
+                                            <label>Норма азота "от"</label>
+                                            <input type="number" class="form-control" name="nitrogen_rate_from"
+                                                   placeholder="Норма азота 'от'">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label>Норма азота "до"</label>
+                                            <input type="number" class="form-control" name="nitrogen_rate_to"
+                                                   placeholder="Норма азота 'до'">
+                                        </div>
+                                        <div class="card col-12">
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-1 "
+                                                 style="height: 150px; width: 200px;">
+                                                <table class="table table-head-fixed text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Название</th>
+                                                    </tr>
+                                                    <tr>
+                                                        @if(isset($data['nitrogen_rate_from']) && isset($data['nitrogen_rate_to']))
+                                                            @foreach($fertilizers_search as $fertilizer_search)
+                                                                <td>{{ $fertilizer_search->id }}</td>
+                                                                <td>{{ $fertilizer_search->name }}</td>
+
+                                                            @endforeach
+                                                        @else
+                                                            <td></td>
+                                                        @endif
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-3 " style="border: 1px solid darkred; margin: 5px">
+                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
+                                          class="w-65" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('get')
+                                        <div class="form-group ">
+                                            <label>Норма фосфора "от"</label>
+                                            <input type="number" class="form-control" name="phosphorus_rate_from"
+                                                   placeholder="Норма азота 'от'">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label>Норма фосфора "до"</label>
+                                            <input type="number" class="form-control" name="phosphorus_rate_to"
+                                                   placeholder="Норма азота 'до'">
+                                        </div>
+                                        <div class="card col-12">
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-1 "
+                                                 style="height: 150px; width: 200px;">
+                                                <table class="table table-head-fixed text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Название</th>
+                                                    </tr>
+                                                    <tr>
+                                                        @if(isset($data['phosphorus_rate_from']) && isset($data['phosphorus_rate_to']))
+                                                            @foreach($fertilizers_search as $fertilizer_search)
+                                                                <td>{{ $fertilizer_search->id }}</td>
+                                                                <td>{{ $fertilizer_search->name }}</td>
+
+                                                            @endforeach
+                                                        @else
+                                                            <td></td>
+                                                        @endif
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-3 " style="border: 1px solid darkred; margin: 5px">
+                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
+                                          class="w-65" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('get')
+                                        <div class="form-group ">
+                                            <label>Норма калия "от"</label>
+                                            <input type="number" class="form-control" name="potassium_rate_from"
+                                                   placeholder="Норма калия 'от'">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label>Норма фосфора "до"</label>
+                                            <input type="number" class="form-control" name="potassium_rate_to"
+                                                   placeholder="Норма калия 'до'">
+                                        </div>
+                                        <div class="card col-12">
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-1 "
+                                                 style="height: 150px; width: 200px;">
+                                                <table class="table table-head-fixed text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Название</th>
+                                                    </tr>
+                                                    <tr>
+                                                        @if(isset($data['potassium_rate_from']) && isset($data['potassium_rate_to']))
+                                                            @foreach($fertilizers_search as $fertilizer_search)
+                                                                <td>{{ $fertilizer_search->id }}</td>
+                                                                <td>{{ $fertilizer_search->name }}</td>
+
+                                                            @endforeach
+                                                        @else
+                                                            <td></td>
+                                                        @endif
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-3 " style="border: 1px solid darkred; margin: 5px">
+                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
+                                          class="w-65" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('get')
+                                        <div class="form-group ">
+                                            <label>Стоимость "от"</label>
+                                            <input type="number" class="form-control" name="price_from"
+                                                   placeholder="стоимость 'от'">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label>Стоимость "до"</label>
+                                            <input type="number" class="form-control" name="price_to"
+                                                   placeholder="стоимость 'до'">
+                                        </div>
+                                        <div class="card col-12">
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-1 "
+                                                 style="height: 150px; width: 200px;">
+                                                <table class="table table-head-fixed text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Название</th>
+                                                    </tr>
+                                                    <tr>
+                                                        @if(isset($data['price_from']) && isset($data['price_to']))
+                                                            @foreach($fertilizers_search as $fertilizer_search)
+                                                                <td>{{ $fertilizer_search->id }}</td>
+                                                                <td>{{ $fertilizer_search->name }}</td>
+
+                                                            @endforeach
+                                                        @else
+                                                            <td></td>
+                                                        @endif
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-3 " style="border: 1px solid darkred; margin:5px">
+                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
+                                          class="w-65" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('get')
+                                        <div class="form-group ">
+                                            <label>Описание</label>
+                                            <input type="text" class="form-control" name="description"
+                                                   placeholder="Описание удобрения">
+                                        </div>
+                                        <div class="card col-12 mb-3" style="height:240px">
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-1 "
+                                                 style="height: 150px; width: 200px;">
+                                                <table class="table table-head-fixed text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Название</th>
+                                                    </tr>
+                                                    <tr>
+                                                        @if(isset($data['description']))
+                                                            @foreach($fertilizers_search as $fertilizer_search)
+                                                                <td>{{ $fertilizer_search->id }}</td>
+                                                                <td>{{ $fertilizer_search->name }}</td>
+                                                            @endforeach
+                                                        @else
+                                                            <td></td>
+                                                        @endif
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-3 " style="border: 1px solid darkred; margin: 5px">
+                                    <form action="{{route('admin.fertilizer.index')}}" method="post"
+                                          class="w-65" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('get')
+                                        <div class="form-group ">
+                                            <label>Назначение</label>
+                                            <input type="text" class="form-control" name="destination"
+                                                   placeholder="Назначение">
+                                        </div>
+                                        <div class="card col-12 mb-3" style="height: 240px">
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-1 "
+                                                 style="height: 150px; width: 200px;">
+                                                <table class="table table-head-fixed text-nowrap">
+                                                    <tbody>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Название</th>
+                                                    </tr>
+                                                    <tr>
+                                                        @if(isset($data['destination']))
+                                                            @foreach($fertilizers_search as $fertilizer_search)
+                                                                <td>{{ $fertilizer_search->id }}</td>
+                                                                <td>{{ $fertilizer_search->name }}</td>
+                                                            @endforeach
+                                                        @else
+                                                            <td></td>
+                                                        @endif
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
 
+                            </div>
 
                         </div>
-                        <div class="mt-3">
-                            <h4 class="mb-3"> Фильтр по удобрениям</h4>
-
-                            <div class="col-12 " style="border: 1px solid darkred;">
-                                <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                      class="w-65" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('get')
-                                    <div class="form-group ">
-                                        <label>наименование</label>
-                                        <input type="text" class="form-control" name="name"
-                                               placeholder="Наименование удобрения">
-                                    </div>
-                                    <div class="card col-9">
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-1 "
-                                             style="height: 150px; width: 200px;">
-                                            <table class="table table-head-fixed text-nowrap">
-                                                <tbody>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Название</th>
-                                                </tr>
-                                                <tr>
-                                                    @if(isset($data['name']))
-                                                        @foreach($fertilizers_search as $fertilizer_search)
-                                                            <td>{{ $fertilizer_search->id }}</td>
-                                                            <td>{{ $fertilizer_search->name }}</td>
-                                                        @endforeach
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="col-12 " style="border: 1px solid darkred;">
-                                <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                      class="w-65" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('get')
-                                    <div class="form-group ">
-                                        <label>Норма азота "от"</label>
-                                        <input type="number" class="form-control" name="nitrogen_rate_from"
-                                               placeholder="Норма азота 'от'">
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Норма азота "до"</label>
-                                        <input type="number" class="form-control" name="nitrogen_rate_to"
-                                               placeholder="Норма азота 'до'">
-                                    </div>
-                                    <div class="card col-9">
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-1 "
-                                             style="height: 150px; width: 200px;">
-                                            <table class="table table-head-fixed text-nowrap">
-                                                <tbody>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Название</th>
-                                                </tr>
-                                                <tr>
-                                                    @if(isset($data['nitrogen_rate_from']) && isset($data['nitrogen_rate_to']))
-                                                        @foreach($fertilizers_search as $fertilizer_search)
-                                                            <td>{{ $fertilizer_search->id }}</td>
-                                                            <td>{{ $fertilizer_search->name }}</td>
-
-                                                        @endforeach
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="col-12 " style="border: 1px solid darkred;">
-                                <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                      class="w-65" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('get')
-                                    <div class="form-group ">
-                                        <label>Норма фосфора "от"</label>
-                                        <input type="number" class="form-control" name="phosphorus_rate_from"
-                                               placeholder="Норма азота 'от'">
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Норма фосфора "до"</label>
-                                        <input type="number" class="form-control" name="phosphorus_rate_to"
-                                               placeholder="Норма азота 'до'">
-                                    </div>
-                                    <div class="card col-9">
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-1 "
-                                             style="height: 150px; width: 200px;">
-                                            <table class="table table-head-fixed text-nowrap">
-                                                <tbody>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Название</th>
-                                                </tr>
-                                                <tr>
-                                                    @if(isset($data['phosphorus_rate_from']) && isset($data['phosphorus_rate_to']))
-                                                        @foreach($fertilizers_search as $fertilizer_search)
-                                                            <td>{{ $fertilizer_search->id }}</td>
-                                                            <td>{{ $fertilizer_search->name }}</td>
-
-                                                        @endforeach
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="col-12 " style="border: 1px solid darkred;">
-                                <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                      class="w-65" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('get')
-                                    <div class="form-group ">
-                                        <label>Норма калия "от"</label>
-                                        <input type="number" class="form-control" name="potassium_rate_from"
-                                               placeholder="Норма калия 'от'">
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Норма фосфора "до"</label>
-                                        <input type="number" class="form-control" name="potassium_rate_to"
-                                               placeholder="Норма калия 'до'">
-                                    </div>
-                                    <div class="card col-9">
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-1 "
-                                             style="height: 150px; width: 200px;">
-                                            <table class="table table-head-fixed text-nowrap">
-                                                <tbody>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Название</th>
-                                                </tr>
-                                                <tr>
-                                                    @if(isset($data['potassium_rate_from']) && isset($data['potassium_rate_to']))
-                                                        @foreach($fertilizers_search as $fertilizer_search)
-                                                            <td>{{ $fertilizer_search->id }}</td>
-                                                            <td>{{ $fertilizer_search->name }}</td>
-
-                                                        @endforeach
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="col-12 " style="border: 1px solid darkred;">
-                                <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                      class="w-65" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('get')
-                                    <div class="form-group ">
-                                        <label>Стоимость "от"</label>
-                                        <input type="number" class="form-control" name="price_from"
-                                               placeholder="стоимость 'от'">
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Стоимость "до"</label>
-                                        <input type="number" class="form-control" name="price_to"
-                                               placeholder="стоимость 'до'">
-                                    </div>
-                                    <div class="card col-9">
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-1 "
-                                             style="height: 150px; width: 200px;">
-                                            <table class="table table-head-fixed text-nowrap">
-                                                <tbody>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Название</th>
-                                                </tr>
-                                                <tr>
-                                                    @if(isset($data['price_from']) && isset($data['price_to']))
-                                                        @foreach($fertilizers_search as $fertilizer_search)
-                                                            <td>{{ $fertilizer_search->id }}</td>
-                                                            <td>{{ $fertilizer_search->name }}</td>
-
-                                                        @endforeach
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="col-12 " style="border: 1px solid darkred;">
-                                <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                      class="w-65" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('get')
-                                    <div class="form-group ">
-                                        <label>Описание</label>
-                                        <input type="text" class="form-control" name="description"
-                                               placeholder="Описание удобрения">
-                                    </div>
-                                    <div class="card col-9">
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-1 "
-                                             style="height: 150px; width: 200px;">
-                                            <table class="table table-head-fixed text-nowrap">
-                                                <tbody>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Название</th>
-                                                </tr>
-                                                <tr>
-                                                    @if(isset($data['description']))
-                                                        @foreach($fertilizers_search as $fertilizer_search)
-                                                            <td>{{ $fertilizer_search->id }}</td>
-                                                            <td>{{ $fertilizer_search->name }}</td>
-                                                        @endforeach
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div class="col-12 " style="border: 1px solid darkred;">
-                                <form action="{{route('admin.fertilizer.index')}}" method="post"
-                                      class="w-65" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('get')
-                                    <div class="form-group ">
-                                        <label>Назначение</label>
-                                        <input type="text" class="form-control" name="destination"
-                                               placeholder="Назначение">
-                                    </div>
-                                    <div class="card col-9">
-                                        <!-- /.card-header -->
-                                        <div class="card-body table-responsive p-1 "
-                                             style="height: 150px; width: 200px;">
-                                            <table class="table table-head-fixed text-nowrap">
-                                                <tbody>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Название</th>
-                                                </tr>
-                                                <tr>
-                                                    @if(isset($data['destination']))
-                                                        @foreach($fertilizers_search as $fertilizer_search)
-                                                            <td>{{ $fertilizer_search->id }}</td>
-                                                            <td>{{ $fertilizer_search->name }}</td>
-                                                        @endforeach
-                                                    @else
-                                                        <td></td>
-                                                    @endif
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- /.card-body -->
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                                    </div>
-                                </form>
-                            </div>
-                            {{--   <div class="form-group">
-                                   <input type="submit" class="btn btn-primary" value="Применить фильтр">
-                               </div>--}}
-                            {{--
-                            <div class="form-group ">
-                                <input type="number" class="form-control" name="phosphorus_rate"
-                                       placeholder="Норма фосфора" value="{{old('phosphorus_rate')}}">
-                                @error('phosphorus_rate')
-                                <div class="text-danger"> Это поле необходимо заполнить</div>
-                                @enderror
-                            </div>
-                            <div class="form-group ">
-                                <input type="number" class="form-control" name="potassium_rate"
-                                       value="{{old('potassium_rate')}}" placeholder="Норма калия">
-                                @error('potassium_rate')
-                                <div class="text-danger"> Это поле необходимо заполнить</div>
-                                @enderror
-                            </div>
-                            <div class="form-group ">
-                                <input type="number" class="form-control" name="culture_group_id"
-                                       value="{{old('culture_group_id')}}" placeholder="группа культур">
-                                @error('culture_group_id')
-                                <div class="text-danger">Это поле необходимо заполнить</div>
-                                @enderror
-                            </div>
-                            <div class="form-group ">
-                                <input type="text" class="form-control" name="district"
-                                       value="{{old('district')}}" placeholder="район">
-                                @error('district')
-                                <div class="text-danger">Это поле необходимо заполнить</div>
-                                @enderror
-                            </div>
-                            <div class="form-group ">
-                                <input type="number" class="form-control" name="price"
-                                       value="{{old('price')}}" placeholder="цена">
-                                @error('price')
-                                <div class="text-danger">Это поле необходимо заполнить</div>
-                                @enderror
-                            </div>
-                            <div class="form-group ">
-                                <input type="text" class="form-control" name="description"
-                                       value="{{old('description')}}" placeholder="описание">
-                                @error('description')
-                                <div class="text-danger">Это поле необходимо заполнить</div>
-                                @enderror
-                            </div>
-                            <div class="form-group ">
-                                <input type="text" class="form-control" name="destination"
-                                       value="{{old('destination')}}" placeholder="назначение">
-                                @error('destination')
-                                <div class="text-danger">Это поле необходимо заполнить</div>
-                                @enderror
-                            </div>--}}
-
-
-                        </div>
-
                     </div>
                 </div>
             </div>
-    </div>
-    </section>
+        </section>
     </div>
 
 @endsection

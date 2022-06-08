@@ -13,7 +13,21 @@ class IndexController extends Controller
     public function __invoke(FilterRequest $request)
     {
        $data = $request->validated();
-      //  dd($data);
+
+        if (isset($data['culture_group_ids'])){
+            $culture_group_ids = $data['culture_group_ids'];
+        }
+        else {
+            $culture_group_ids = null;
+        }
+
+        if (isset($data['districts'])){
+            $districts = $data['districts'];
+        }
+        else {
+            $districts = null;
+        }
+
          $filter = app()->make(FertilizerFilter::class, ['queryParams' => array_filter
         ($data)]);
 
@@ -23,12 +37,10 @@ class IndexController extends Controller
 
         $deleted_fertilizers = Fertilizer::onlyTrashed()->get();
 
-        $districts = Fertilizer::all('district');
+  //     $districts = Fertilizer::all('district');
 
-       //      $cultures_groups = Fertilizer::all('culture_group_id', 'id');
-
-             return view('admin.fertilizer.index',
+                   return view('admin.fertilizer.index',
                  compact('fertilizers', 'deleted_fertilizers', 'districts',
-                     'fertilizers_search', 'data', ));
+                     'fertilizers_search', 'data', 'culture_group_ids'));
     }
 }

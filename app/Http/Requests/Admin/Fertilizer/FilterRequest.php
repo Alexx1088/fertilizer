@@ -31,7 +31,7 @@ class FilterRequest extends FormRequest
             'phosphorus_rate_to' => 'nullable',
             'potassium_rate_from' => '|',
             'potassium_rate_to' => '|',
-            'culture_group_ids' => '',
+            'culture_group_ids' => 'nullable',
             'price_from' => '|',
             'price_to' => '|',
             'description' => '|string',
