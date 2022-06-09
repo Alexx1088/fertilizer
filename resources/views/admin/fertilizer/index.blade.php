@@ -85,7 +85,7 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
-                        <div class="col-12 mt-3 ml-3 mb-1 " style="max-width: 910px;
+                        <div class="col-12 mt-3 ml-3 mb-1 " style="max-width: 1000px;
                         width: 900px; height: 40px"; >
                             <h4 class="m-0 text-center">Удобрения, удаленные из таблицы удобрений:</h4>
                         </div><!-- /.col -->

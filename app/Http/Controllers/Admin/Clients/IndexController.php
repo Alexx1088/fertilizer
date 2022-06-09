@@ -16,9 +16,9 @@ class IndexController extends Controller
 
         $filter = app()->make(ClientFilter::class, ['queryParams' => array_filter($data)]);
 
-        $clients = Client::filter($filter)->get();
+        $clients_search = Client::filter($filter)->get();
 
-      //  dd($clients);
+     //   dd($clients_search);
 
 
         $clients = Client::all();

@@ -106,5 +106,5 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
+<h4 class="mb-3" style="margin-left:280px "> Фильтр для клиентов:</h4>
 @endsection
