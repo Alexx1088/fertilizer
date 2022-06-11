@@ -37,19 +37,19 @@ class ClientFilter extends AbstractFilter
 
    public function agreement_date_from(Builder $builder, $agreement_date_from)
     {
-        return $builder->where('agreement_date',$agreement_date_from);
+        return $builder->where('agreement_date', '>', $agreement_date_from);
     }
     public function agreement_date_to(Builder $builder, $agreement_date_to)
     {
-        return $builder->where('agreement_date',$agreement_date_to);
+        return $builder->where('agreement_date', '<', $agreement_date_to);
     }
     public function delivery_cost_from(Builder $builder, $delivery_cost_from)
     {
-        return $builder->where('delivery_cost', $delivery_cost_from);
+        return $builder->where('delivery_cost', '>', $delivery_cost_from);
     }
     public function delivery_cost_to(Builder $builder, $delivery_cost_to)
     {
-        return $builder->where('delivery_cost', $delivery_cost_to);
+        return $builder->where('delivery_cost', '<', $delivery_cost_to);
     }
 
 }

@@ -13,6 +13,7 @@ class IndexController extends Controller
     public function __invoke(FilterRequest $request)
     {
         $data = $request->validated();
+  //      dd($data);
 
 if (isset($data['regions'])) {
 
@@ -24,13 +25,13 @@ else {
 }
             $filter = app()->make(ClientFilter::class, ['queryParams' => array_filter($data)]);
 
-        $clients_search = Client::filter($filter)->get();
-
+        $clients_searches = Client::filter($filter)->get();
+     //   dd($clients_searches);
         $clients = Client::all();
 
         $deleted_clients = Client::onlyTrashed()->get();
 
         return view('admin.client.index', compact('clients', 'deleted_clients',
-            'clients_search', 'regions' ));
+            'clients_searches', 'regions', 'data' ));
     }
 }

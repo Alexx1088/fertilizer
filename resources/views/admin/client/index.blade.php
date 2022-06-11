@@ -108,15 +108,15 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <h4 class="mb-3" style="margin-left:280px "> Фильтр для клиентов:</h4>
-    <div class="row d-flex flex-row ml-5" style="width:900px">
+    <h4 class="mb-3 mt-3" style="text-align: center "> Фильтр для клиентов:</h4>
+    <div class="row d-flex flex-row " style="width:1300px; margin-left: 300px" >
 
-        <div class="col-4" style="border: 1px solid darkred; margin-left:300px; margin-right: 5px">
+        <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
             <div class="form-group mr-3">
                 <form action="{{ route('admin.clients.index') }}" method="post">
                     @csrf
                     @method('get')
-                    <label>Регион</label>
+                    <label style="margin-left: 100px; margin-top: 10px">Регион</label>
                     <select multiple class="form-control" name="regions[]">
                         @foreach($clients as $client)
                             <option value="{{$client->id}}">{{$client->region}}
@@ -124,7 +124,7 @@
                         @endforeach
                     </select>
                     {{--  </label>--}}
-                    <button type="submit" class="btn btn-block btn-primary mt-3">
+                    <button type="submit" class="btn btn-block btn-primary mt-3 ml-2">
                         Поиск
                     </button>
                 </form>
@@ -154,13 +154,13 @@
             </div>
         </div>
 
-        <div class="col-3" style="border: 1px solid darkred; margin: 5px">
+        <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
             <form action="{{route('admin.clients.index')}}" method="post"
                   class="w-65" enctype="multipart/form-data">
                 @csrf
                 @method('get')
                 <div class="form-group ">
-                    <label>Имя клиента</label>
+                    <label style="margin-left: 75px; margin-top: 10px">Имя клиента</label>
                     <input type="text" class="form-control" name="name"
                            placeholder="Имя клиента">
                 </div>
@@ -176,9 +176,9 @@
                             </tr>
                             <tr>
                                 @if(isset($data['name']))
-                                    @foreach($clients_search as $client_search)
-                                        <td>{{ $client_search->id }}</td>
-                                        <td>{{ $client_search->name }}</td>
+                                    @foreach($clients_searches as $item)
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->name }}</td>
                                     @endforeach
                                 @else
                                     <td></td>
@@ -190,13 +190,107 @@
                     <!-- /.card-body -->
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Применить фильтр">
+                    <input type="submit" class="btn btn-primary ml-5 mt-5" value="Применить фильтр">
                 </div>
             </form>
         </div>
 
+        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width:250px; height:420px";>
+            <form action="{{route('admin.clients.index')}}" method="post"
+                  class="w-65" enctype="multipart/form-data">
+                @csrf
+                @method('get')
+                <div class="form-group ">
+                    <label style="margin-left: 75px; margin-top: 10px">Дата договора "от"</label>
+                    <input type="date" class="form-control" name="agreement_date_from"
+                           placeholder="дата договора 'от'">
+                </div>
+                <div class="form-group ">
+                    <label style="margin-left: 75px; margin-top: 10px">Дата договора "до"</label>
+                    <input type="date" class="form-control" name="agreement_date_to"
+                           placeholder="дата договора 'до'">
+                </div>
+                <div class="card col-12">
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-1 "
+                         style="height: 150px; width: 200px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                            </tr>
+                            <tr>
+                                @if(isset($data['agreement_date_from']) && isset($data['agreement_date_to']))
+                                    @foreach($clients_searches as $item)
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->name }}</td>
+                                    @endforeach
+                                @else
+                                    <td></td>
+                                @endif
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary mt-1" style="margin-left: 75px"
+                           value="Применить фильтр">
+                </div>
+            </form>
+        </div>
 
-    </div> row d-flex
+        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
+            <form action="{{route('admin.clients.index')}}" method="post"
+                  class="w-65" enctype="multipart/form-data">
+                @csrf
+                @method('get')
+                <div class="form-group ">
+                    <label>Стоимость поставки "от"</label>
+                    <input type="number" class="form-control" name="delivery_cost_from"
+                           placeholder="Стоимость поставки 'от'">
+                </div>
+                <div class="form-group ">
+                    <label>Стоимость поставки "до"</label>
+                    <input type="number" class="form-control" name="delivery_cost_to"
+                           placeholder="Стоимость поставки 'до'">
+                </div>
+                <div class="card col-12">
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-1 "
+                         style="height: 150px; width: 240px;">
+                        <table class="table table-head-fixed text-nowrap">
+                            <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                            </tr>
+                            <tr>
+                                @if(isset($data['delivery_cost_from']) && isset($data['delivery_cost_to']))
+                                    @foreach($clients_searches as $item)
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->name }}</td>
+
+                                    @endforeach
+                                @else
+                                    <td></td>
+                                @endif
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary mt-3" style="margin-left: 75px"
+                           value="Применить фильтр">
+                </div>
+            </form>
+        </div>
+
+    </div> {{--row d-flex--}}
 
 
 
