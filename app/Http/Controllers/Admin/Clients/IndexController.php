@@ -14,17 +14,23 @@ class IndexController extends Controller
     {
         $data = $request->validated();
 
-        $filter = app()->make(ClientFilter::class, ['queryParams' => array_filter($data)]);
+if (isset($data['regions'])) {
+
+    $regions = $data['regions'];
+}
+
+else {
+    $regions = null;
+}
+            $filter = app()->make(ClientFilter::class, ['queryParams' => array_filter($data)]);
 
         $clients_search = Client::filter($filter)->get();
-
-     //   dd($clients_search);
-
 
         $clients = Client::all();
 
         $deleted_clients = Client::onlyTrashed()->get();
 
-        return view('admin.client.index', compact('clients', 'deleted_clients'));
+        return view('admin.client.index', compact('clients', 'deleted_clients',
+            'clients_search', 'regions' ));
     }
 }
