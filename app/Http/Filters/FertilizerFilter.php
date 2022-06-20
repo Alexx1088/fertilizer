@@ -84,17 +84,17 @@ class FertilizerFilter extends AbstractFilter
         $builder->where('potassium_rate', '<', $potassium_rate_to);
 
     }
-      public function culture_group_ids(Builder $builder, $value)
+      public function culture_group_ids(Builder $builder, $culture_group_ids)
       {
 
-          $builder->where('culture_group_id', 'like', $value);
+          $builder->whereIn('culture_group_id', $culture_group_ids);
 
       }
 
-      public function districts(Builder $builder, $value)
+      public function districts(Builder $builder, $districts)
       {
 
-          $builder->where('district', 'like', $value);
+          $builder->whereIn('district', $districts);
 
       }
 
