@@ -120,39 +120,62 @@
                         </div>
                         <!-- /.card-body -->
                     </div>
-                    <div class="col-12 mt-3 ml-3 mb-1 " style="max-width: 1000px;
-                        width: 900px; height: 40px" ;>
-                        <h4 class="m-0 text-center">Удобрения, удаленные из таблицы удобрений:</h4>
-                    </div><!-- /.col -->
-                    <div class="row" style="max-width: 510px; width: 100%;">
 
-                        <div class="ml-5 col-9 ">
-                            <div class="card col-12 mt-3 " style="margin-right: 5px;  ">
-                                <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0 " style="height: 300px; ">
-                                    <table class="table table-head-fixed text-nowrap ">
-                                        <thead>
-                                        <tr>
-                                            <th style="width: 10%">ID</th>
-                                            <th>Название</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($deleted_fertilizers as $deleted_fertilizer)
-                                            <tr>
-                                                <td>{{ $deleted_fertilizer->id }}</td>
-                                                <td>{{ $deleted_fertilizer->name }}</td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                    <div class="form-group mr-3 ml-5">
+                        <form action="{{ route('admin.fertilizer.index') }}" method="post">
+                            @csrf
+                            @method('get')
+
+                            <div class="form-group ">
+                                {{--<label>Название</label>--}}
+                                <input type="hidden" class="form-control" name="name"
+                                       value="{{old('name')}}">
                             </div>
 
-                        </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" value="Сбросить фильтр">
+                            </div>
+                        </form>
+                    </div>
 
-                        <h4 class="mb-3" style="margin-left:280px "> Фильтр по удобрениям:</h4>
-                        <div class="d-flex {{--align-content-start--}} flex-wrap " {{--style="width: 1500px;"--}}>
+
+                    <div style="width: 800px; margin: 50px 0 0 0px; text-align: center ">
+                        <h4> Фильтр по удобрениям:</h4>
+                    </div>
+                    <div class="wrapper d-flex align-content-start" style="margin: 50px 300px 0 100px;">
+                        {{--  <div class="d-flex --}}{{--align-content-start--}}{{-- flex-wrap " style="width: 1000px;">--}}
+                        <div class="wrapper_del_fert mt-1"
+                             style="width: 400px; height: 400px; border: solid 1px darkred; ">
+
+                            <h5 class="m-0 text-center ml-1">Удобрения, удаленные из таблицы удобрений:</h5>
+
+                            {{--  <div class="row" style="max-width: 510px; width: 100%;">--}}
+                            <div class="ml-5 col-9 ">
+                                <div class="card col-12 mt-3 " style="margin-right: 5px;  ">
+                                    <!-- /.card-header -->
+                                    <div class="card-body table-responsive p-0 " style="height: 300px; ">
+                                        <table class="table table-head-fixed text-nowrap ">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 10%">ID</th>
+                                                <th>Название</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($deleted_fertilizers as $deleted_fertilizer)
+                                                <tr>
+                                                    <td>{{ $deleted_fertilizer->id }}</td>
+                                                    <td>{{ $deleted_fertilizer->name }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> {{--wrapper deleted fertilizers--}}
+
+                        <div class="wrapper_filters d-flex flex-wrap ">
 
                             <div {{--class="col-4"--}} style=" border: solid 1px red; margin: 5px">
                                 <div class="form-group mr-3">
@@ -335,7 +358,7 @@
                                             <option
                                                     @if(isset($data['districts']))
                                                     @foreach($data['districts'] as $district)
-                                                     {{ $district == $fertilizer->district ? 'selected' : '' }}
+                                                    {{ $district == $fertilizer->district ? 'selected' : '' }}
                                                     @endforeach
                                                     @endif
                                                     value="{{ $fertilizer->district }}">{{ $fertilizer->district }}</option>
@@ -347,10 +370,9 @@
                                     </div>
                                 </form>
                             </div>
+                        </div>{{-- wrapper_filters--}}
 
-
-                        </div>{{-- d-flex--}}
-
+                        {{--  </div>--}}{{-- d-flex--}}
                     </div>
                 </div>
             </div>
