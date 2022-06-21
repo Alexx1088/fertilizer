@@ -186,7 +186,8 @@
                                         <div class="form-group ">
                                             <label>Название</label>
                                             <input type="text" class="form-control" name="name"
-                                                   placeholder="Название удобрения" value="{{old('name')}}">
+                                                   placeholder="Название удобрения"
+                                                   value="{{old('name')}}">
                                         </div>
 
                                         <div class="form-group">

@@ -13,25 +13,25 @@ class IndexController extends Controller
     public function __invoke(FilterRequest $request)
     {
         $data = $request->validated();
-  //      dd($data);
+// dd($data);
 
-if (isset($data['regions'])) {
+/*if (isset($data['regions'])) {
 
     $regions = $data['regions'];
 }
 
 else {
     $regions = null;
-}
+}*/
             $filter = app()->make(ClientFilter::class, ['queryParams' => array_filter($data)]);
-
+      //  dd($filter);
         $clients_searches = Client::filter($filter)->get();
-     //   dd($clients_searches);
+   // dd($clients_searches);
         $clients = Client::all();
 
         $deleted_clients = Client::onlyTrashed()->get();
 
         return view('admin.client.index', compact('clients', 'deleted_clients',
-            'clients_searches', 'regions', 'data' ));
+            'clients_searches', /*'regions',*/ 'data' ));
     }
 }

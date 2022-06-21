@@ -13,7 +13,7 @@ class ClientFilter extends AbstractFilter
     public const AGREEMENT_DATE_TO = 'agreement_date_to';
     public const DELIVERY_COST_FROM = 'delivery_cost_from';
     public const DELIVERY_COST_TO = 'delivery_cost_to';
-    public const REGION = 'region';
+    public const REGIONS = 'regions';
 
     protected function getCallbacks(): array
     {
@@ -25,7 +25,7 @@ class ClientFilter extends AbstractFilter
             self::AGREEMENT_DATE_TO => [$this, 'agreement_date_to'],
             self::DELIVERY_COST_FROM => [$this, 'delivery_cost_from'],
             self::DELIVERY_COST_TO => [$this, 'delivery_cost_to'],
-            self::REGION => [$this, 'region'],
+            self::REGIONS => [$this, 'regions'],
         ];
 
     }
@@ -51,5 +51,8 @@ class ClientFilter extends AbstractFilter
     {
         return $builder->where('delivery_cost', '<', $delivery_cost_to);
     }
-
+    public function regions(Builder $builder, $regions)
+    {
+        $builder->whereIn('region', $regions);
+    }
 }

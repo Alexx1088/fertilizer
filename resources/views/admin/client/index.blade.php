@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="content-wrapper">
+    <div class="content-wrapper ">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -26,8 +26,10 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-1 mb-3">
-                        <a href="{{ route('admin.clients.create') }}" class="btn btn-block btn-primary">Добавить</a>
+                    <div class="col-3 mb-3">
+                        <a href="{{ route('admin.clients.create') }}"
+                           class="btn btn-block btn-primary"
+                        style="width: auto">Добавить</a>
                     </div>
                 </div>
                 <div class="row"
@@ -47,35 +49,76 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($clients as $client)
-                                    <tr>
-                                        <td>{{ $client->id }}</td>
-                                        <td>{{ $client->name }}</td>
-                                        <td>{{ $client->agreement_date}}</td>
-                                        <td>{{ $client->delivery_cost}}</td>
-                                        <td>{{ $client->region}}</td>
-                                        <td><a href="{{ route('admin.clients.show', $client->id) }}"><i
-                                                        class="far fa-eye"></i></a></td>
-                                        <td><a href="{{ route('admin.clients.edit', $client->id) }}"
-                                               class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
+                                @if($data = null)
+                                    @foreach($clients as $client)
+                                        <tr>
+                                            <td>{{ $client->id }}</td>
+                                            <td>{{ $client->name }}</td>
+                                            <td>{{ $client->agreement_date}}</td>
+                                            <td>{{ $client->delivery_cost}}</td>
+                                            <td>{{ $client->region}}</td>
+                                            <td><a href="{{ route('admin.clients.show', $client->id) }}"><i
+                                                            class="far fa-eye"></i></a></td>
+                                            <td><a href="{{ route('admin.clients.edit', $client->id) }}"
+                                                   class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
 
-                                        <td>
-                                            <form action="{{route('admin.clients.delete', $client->id)}}"
-                                                  method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="border-0 bg-transparent">
-                                                    <i class="fas fa-trash text-danger"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td>
+                                                <form action="{{route('admin.clients.delete', $client->id)}}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent">
+                                                        <i class="fas fa-trash text-danger"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    @foreach($clients_searches as $clients_search)
+                                        <tr>
+                                            <td>{{ $clients_search->id }}</td>
+                                            <td>{{ $clients_search->name }}</td>
+                                            <td>{{ $clients_search->agreement_date}}</td>
+                                            <td>{{ $clients_search->delivery_cost}}</td>
+                                            <td>{{ $clients_search->region}}</td>
+                                            <td><a href="{{ route('admin.clients.show', $clients_search->id) }}"><i
+                                                            class="far fa-eye"></i></a></td>
+                                            <td><a href="{{ route('admin.clients.edit', $clients_search->id) }}"
+                                                   class="text-success"><i class="fas fa-pencil-alt"></i></a></td>
+
+                                            <td>
+                                                <form action="{{route('admin.clients.delete', $clients_search->id)}}"
+                                                      method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent">
+                                                        <i class="fas fa-trash text-danger"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
-                        </div>
+                                                    </div>
 
                         <!-- /.card-body -->
+                    </div>
+                    <div class="form-group ml-5 mt-5" >
+                        <form action="{{ route('admin.clients.index') }}" method="post">
+                            @csrf
+                            @method('get')
+
+                            <div class="form-group ">
+                                <input type="hidden" class="form-control" name="name"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" value="Сбросить фильтр">
+                            </div>
+                        </form>
                     </div>
                     <div>
                         <h4 class="m-0 mb-4 mt-5">Клиенты, удаленные из таблицы клиентов:</h4>
@@ -108,8 +151,9 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <h4 class="mb-3 mt-3" style="text-align: center "> Фильтр для клиентов:</h4>
-    <div class="row d-flex flex-row " style="width:1300px; margin-left: 300px" >
+    <h4 class="mb-3 " style="text-align: center "> Фильтр для клиентов:</h4>
+    <div class="row d-flex flex-row "
+         style="width:1300px; margin-left: 300px;">
 
         <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
             <div class="form-group mr-3">
@@ -119,7 +163,13 @@
                     <label style="margin-left: 100px; margin-top: 10px">Регион</label>
                     <select multiple class="form-control" name="regions[]">
                         @foreach($clients as $client)
-                            <option value="{{$client->id}}">{{$client->region}}
+                            <option
+                                    @if(isset($data['regions']))
+                                    @foreach($data['regions'] as $region_id)
+                                    {{ $region_id == $client->id ? 'selected' : '' }}
+                                    @endforeach
+                                    @endif
+                                    value="{{$client->region}}">{{$client->region}}
                             </option>
                         @endforeach
                     </select>
@@ -129,29 +179,7 @@
                     </button>
                 </form>
             </div>
-            <div class="card col-12">
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-1 "
-                     style="height: 150px; width: 200px;">
-                    <table class="table table-head-fixed text-nowrap">
-                        <tbody>
-                        <tr>
-                            <th width="5">ID региона</th>
-                        </tr>
-                        <tr>
-                            @if(isset($regions))
-                                @foreach($regions as $region)
-                                    <td>{{ $region }}</td>
-                                @endforeach
-                            @else
-                                <td></td>
-                            @endif
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.card-body -->
-            </div>
+
         </div>
 
         <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
@@ -162,40 +190,16 @@
                 <div class="form-group ">
                     <label style="margin-left: 75px; margin-top: 10px">Имя клиента</label>
                     <input type="text" class="form-control" name="name"
-                           placeholder="Имя клиента">
+                           placeholder="Имя клиента" value="{{old('name')}}">
                 </div>
-                <div class="card col-12" style="height:200px">
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-1 "
-                         style="height: 150px; width: 200px;">
-                        <table class="table table-head-fixed text-nowrap">
-                            <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Название</th>
-                            </tr>
-                            <tr>
-                                @if(isset($data['name']))
-                                    @foreach($clients_searches as $item)
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
-                                    @endforeach
-                                @else
-                                    <td></td>
-                                @endif
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary ml-5 mt-5" value="Применить фильтр">
                 </div>
             </form>
         </div>
 
-        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width:250px; height:420px";>
+        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width:250px; height:420px" ;>
             <form action="{{route('admin.clients.index')}}" method="post"
                   class="w-65" enctype="multipart/form-data">
                 @csrf
@@ -203,38 +207,14 @@
                 <div class="form-group ">
                     <label style="margin-left: 75px; margin-top: 10px">Дата договора "от"</label>
                     <input type="date" class="form-control" name="agreement_date_from"
-                           placeholder="дата договора 'от'">
+                           placeholder="дата договора 'от'" value="{{old('agreement_date_from')}}">
                 </div>
                 <div class="form-group ">
                     <label style="margin-left: 75px; margin-top: 10px">Дата договора "до"</label>
                     <input type="date" class="form-control" name="agreement_date_to"
-                           placeholder="дата договора 'до'">
+                           placeholder="дата договора 'до'" value="{{old('agreement_date_to')}}">
                 </div>
-                <div class="card col-12">
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-1 "
-                         style="height: 150px; width: 200px;">
-                        <table class="table table-head-fixed text-nowrap">
-                            <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Название</th>
-                            </tr>
-                            <tr>
-                                @if(isset($data['agreement_date_from']) && isset($data['agreement_date_to']))
-                                    @foreach($clients_searches as $item)
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
-                                    @endforeach
-                                @else
-                                    <td></td>
-                                @endif
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
+
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary mt-1" style="margin-left: 75px"
                            value="Применить фильтр">
@@ -257,32 +237,7 @@
                     <input type="number" class="form-control" name="delivery_cost_to"
                            placeholder="Стоимость поставки 'до'">
                 </div>
-                <div class="card col-12">
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-1 "
-                         style="height: 150px; width: 240px;">
-                        <table class="table table-head-fixed text-nowrap">
-                            <tbody>
-                            <tr>
-                                <th>ID</th>
-                                <th>Название</th>
-                            </tr>
-                            <tr>
-                                @if(isset($data['delivery_cost_from']) && isset($data['delivery_cost_to']))
-                                    @foreach($clients_searches as $item)
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
 
-                                    @endforeach
-                                @else
-                                    <td></td>
-                                @endif
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary mt-3" style="margin-left: 75px"
                            value="Применить фильтр">
