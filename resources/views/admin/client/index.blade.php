@@ -155,7 +155,7 @@
     <div class="row d-flex flex-row "
          style="width:1300px; margin-left: 300px;">
 
-        <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
+        <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 300px;">
             <div class="form-group mr-3">
                 <form action="{{ route('admin.clients.index') }}" method="post">
                     @csrf
@@ -182,12 +182,12 @@
 
         </div>
 
-        <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
-            <form action="{{route('admin.clients.index')}}" method="post"
+        <div style="border: 1px solid darkred; margin: 5px; width: 250px; height: 300px;">
+                      <form action="{{route('admin.clients.index')}}" method="post"
                   class="w-65" enctype="multipart/form-data">
                 @csrf
                 @method('get')
-                <div class="form-group ">
+                                     <div class="form-group ">
                     <label style="margin-left: 75px; margin-top: 10px">Имя клиента</label>
                     <input type="text" class="form-control" name="name"
                            placeholder="Имя клиента" value="{{old('name')}}">
@@ -199,7 +199,7 @@
             </form>
         </div>
 
-        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width:250px; height:420px" ;>
+        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width:250px; height: 300px;" ;>
             <form action="{{route('admin.clients.index')}}" method="post"
                   class="w-65" enctype="multipart/form-data">
                 @csrf
@@ -222,7 +222,7 @@
             </form>
         </div>
 
-        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width: 250px; height: 420px">
+        <div class="col-3 " style="border: 1px solid darkred; margin: 5px; width: 250px; height: 300px;">
             <form action="{{route('admin.clients.index')}}" method="post"
                   class="w-65" enctype="multipart/form-data">
                 @csrf
