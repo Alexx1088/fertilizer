@@ -190,7 +190,7 @@
                                      <div class="form-group ">
                     <label style="margin-left: 75px; margin-top: 10px">Имя клиента</label>
                     <input type="text" class="form-control" name="name"
-                           placeholder="Имя клиента" value="{{old('name')}}">
+                           placeholder="Имя клиента" value="{{request()->input('name')}}">
                 </div>
 
                 <div class="form-group">
@@ -207,12 +207,12 @@
                 <div class="form-group ">
                     <label style="margin-left: 75px; margin-top: 10px">Дата договора "от"</label>
                     <input type="date" class="form-control" name="agreement_date_from"
-                           placeholder="дата договора 'от'" value="{{old('agreement_date_from')}}">
+                           placeholder="дата договора 'от'" value="{{request()->input('agreement_date_from')}}">
                 </div>
                 <div class="form-group ">
                     <label style="margin-left: 75px; margin-top: 10px">Дата договора "до"</label>
                     <input type="date" class="form-control" name="agreement_date_to"
-                           placeholder="дата договора 'до'" value="{{old('agreement_date_to')}}">
+                           placeholder="дата договора 'до'" value="{{request()->input('agreement_date_to')}}">
                 </div>
 
                 <div class="form-group">
@@ -230,12 +230,12 @@
                 <div class="form-group ">
                     <label>Стоимость поставки "от"</label>
                     <input type="number" class="form-control" name="delivery_cost_from"
-                           placeholder="Стоимость поставки 'от'">
+                           placeholder="Стоимость поставки 'от'" value="{{request()->input('delivery_cost_from')}}">
                 </div>
                 <div class="form-group ">
                     <label>Стоимость поставки "до"</label>
                     <input type="number" class="form-control" name="delivery_cost_to"
-                           placeholder="Стоимость поставки 'до'">
+                           placeholder="Стоимость поставки 'до'" value="{{request()->input('delivery_cost_to')}}">
                 </div>
 
                 <div class="form-group">

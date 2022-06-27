@@ -24,7 +24,7 @@ class FilterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string',
+            'name' => 'nullable',
             'agreement_date_from' => 'nullable',
             'agreement_date_to' => 'nullable',
             'delivery_cost_from' => 'nullable',

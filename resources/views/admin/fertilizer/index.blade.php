@@ -187,7 +187,7 @@
                                             <label>Название</label>
                                             <input type="text" class="form-control" name="name"
                                                    placeholder="Название удобрения"
-                                                   value="{{old('name')}}">
+                                                   value="{{ request()->input('name') }}">
                                         </div>
 
                                         <div class="form-group">
@@ -207,7 +207,7 @@
                                         <div class="form-group ">
                                             <label>Назначение</label>
                                             <input type="text" class="form-control" name="destination"
-                                                   placeholder="Назначение" value="{{old('destination')}}">
+                                                   placeholder="Назначение" value="{{ request()->input('destination')}}">
                                         </div>
 
                                         <div class="form-group">
@@ -225,7 +225,7 @@
                                         <div class="form-group ">
                                             <label>Описание</label>
                                             <input type="text" class="form-control" name="description"
-                                                   placeholder="Описание удобрения" value="{{old('description')}}">
+                                                   placeholder="Описание удобрения" value="{{request()->input('description')}}">
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Применить фильтр">
@@ -242,12 +242,12 @@
                                         <div class="form-group ">
                                             <label>Норма азота "от"</label>
                                             <input type="number" class="form-control" name="nitrogen_rate_from"
-                                                   placeholder="Норма азота 'от'" value="{{old('nitrogen_rate_from')}}">
+                                                   placeholder="Норма азота 'от'" value="{{request()->input('nitrogen_rate_from')}}">
                                         </div>
                                         <div class="form-group ">
                                             <label>Норма азота "до"</label>
                                             <input type="number" class="form-control" name="nitrogen_rate_to"
-                                                   placeholder="Норма азота 'до'" value="{{old('nitrogen_rate_to')}}">
+                                                   placeholder="Норма азота 'до'" value="{{request()->input('nitrogen_rate_to')}}">
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Применить фильтр">
@@ -265,13 +265,13 @@
                                             <label>Норма фосфора "от"</label>
                                             <input type="number" class="form-control" name="phosphorus_rate_from"
                                                    placeholder="Норма фосфора 'от'"
-                                                   value="{{old('phosphorus_rate_from')}}">
+                                                   value="{{request()->input('phosphorus_rate_from')}}">
                                         </div>
                                         <div class="form-group ">
                                             <label>Норма фосфора "до"</label>
                                             <input type="number" class="form-control" name="phosphorus_rate_to"
                                                    placeholder="Норма фосфора 'до'"
-                                                   value="{{old('phosphorus_rate_to')}}">
+                                                   value="{{request()->input('phosphorus_rate_to')}}">
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Применить фильтр">
@@ -289,12 +289,13 @@
                                             <label>Норма калия "от"</label>
                                             <input type="number" class="form-control" name="potassium_rate_from"
                                                    placeholder="Норма калия 'от'"
-                                                   value="{{old('potassium_rate_from')}}">
+                                                   value="{{request()->input('potassium_rate_from')}}">
                                         </div>
                                         <div class="form-group ">
                                             <label>Норма калия "до"</label>
                                             <input type="number" class="form-control" name="potassium_rate_to"
-                                                   placeholder="Норма калия 'до'" value="{{old('potassium_rate_to')}}">
+                                                   placeholder="Норма калия 'до'"
+                                                   value="{{request()->input('potassium_rate_to')}}">
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Применить фильтр">
@@ -311,12 +312,12 @@
                                         <div class="form-group ">
                                             <label>стоимость "от"</label>
                                             <input type="number" class="form-control" name="price_from"
-                                                   placeholder="стоимость 'от'" value="{{old('price_from')}}">
+                                                   placeholder="стоимость 'от'" value="{{request()->input('price_from')}}">
                                         </div>
                                         <div class="form-group ">
                                             <label>стоимость "до"</label>
                                             <input type="number" class="form-control" name="price_to"
-                                                   placeholder="стоимость 'до'" value="{{old('price_to')}}">
+                                                   placeholder="стоимость 'до'" value="{{request()->input('price_to')}}">
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Применить фильтр">
