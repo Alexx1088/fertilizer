@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\clients;
 
-use App\Imports\FertilizersImport;
+use App\Imports\ClientsImport;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -13,14 +13,14 @@ class ImportExcelCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'import:excel';
+    protected $signature = 'import:excel:clients';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Импорт показателей';
+    protected $description = 'Импорт клиентов';
 
     /**
      * Create a new command instance.
@@ -39,8 +39,8 @@ class ImportExcelCommand extends Command
      */
     public function handle()
     {
-        Excel::import(new FertilizersImport(),
-            public_path('excel/import/fertilizers.xls'));
+        Excel::import(new ClientsImport(),
+            public_path('excel/import/clients.ods'));
 
     }
 }
