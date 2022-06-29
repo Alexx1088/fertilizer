@@ -33,6 +33,6 @@ class StoreRequest extends FormRequest
             'price' => 'required|',
             'description' => 'required|string',
             'destination' => 'required|string',
-        ];
+                 ];
     }
 }

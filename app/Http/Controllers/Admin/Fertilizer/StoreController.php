@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Fertilizer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Fertilizer\StoreRequest;
+use App\Jobs\StoreFertilizerJob;
 use App\Models\Fertilizer;
 
 class StoreController extends Controller
@@ -16,7 +17,7 @@ class StoreController extends Controller
 
         Fertilizer::firstOrCreate($data);
 
-        return redirect()->route('admin.fertilizer.index');
+         return redirect()->route('admin.fertilizer.index');
 
     }
 }

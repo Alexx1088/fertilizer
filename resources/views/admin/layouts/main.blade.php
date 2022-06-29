@@ -50,6 +50,7 @@
     @include('admin.includes.sidebar')
 
     @yield('content')
+    @include('admin.import.import')
 
     <footer class="main-footer">
        <strong>сайт компании по продаже удобрений</strong>
