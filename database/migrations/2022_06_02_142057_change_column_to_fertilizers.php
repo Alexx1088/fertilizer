@@ -33,7 +33,7 @@ return new class extends Migration
             Schema::table('fertilizers', function (Blueprint $table) {
                 $table->unsignedBigInteger('culture_group_id');
                 $table->foreign('culture_group_id', 'fertilizer_culture_group_id_fk')
-                    ->on('cultures')->references('id');
+                    ->on('cultures')->references('id'); /*link*/
 
         });
     }
