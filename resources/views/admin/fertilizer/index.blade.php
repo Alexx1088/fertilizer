@@ -29,6 +29,10 @@
                     <div class="col-3 mb-3 ml-5">
                         <a href="{{ route('admin.fertilizer.create') }}" class="btn btn-block btn-primary">Добавить</a>
                     </div>
+                    <div class="col-3 mb-3 ml-5">
+                        <a href="{{ route('import_fertilizer.index')}}"
+                           class="btn btn-block btn-primary">Импорт данных из эксель файла</a>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="card col-12 ml-5">

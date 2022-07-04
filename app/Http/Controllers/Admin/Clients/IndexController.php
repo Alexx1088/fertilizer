@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Clients;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\ClientFilter;
 use App\Http\Requests\Admin\Clients\FilterRequest;
+use App\Jobs\StoreClientsJob;
 use App\Models\Client;
 
 class IndexController extends Controller
@@ -22,6 +23,8 @@ class IndexController extends Controller
         $clients = Client::all();
 
         $deleted_clients = Client::onlyTrashed()->get();
+
+        StoreClientsJob::dispatch();
 
         return view('admin.client.index', compact('clients', 'deleted_clients',
             'clients_searches', 'data' ));

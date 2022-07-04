@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Imports\FertilizersImport;
+use App\Imports\ClientsImport;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Maatwebsite\Excel\Facades\Excel;
 
-class StoreFertilizerJob implements ShouldQueue
+class StoreClientsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -31,8 +31,8 @@ class StoreFertilizerJob implements ShouldQueue
      */
     public function handle()
     {
-        Excel::import(new FertilizersImport(),
-            public_path('excel/import/fertilizers.xls'));
+        Excel::import(new ClientsImport(),
+            public_path('excel/import/clients.xls'));
         return back()->withStatus('Excel file imported successfuly');
     }
 }

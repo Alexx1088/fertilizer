@@ -14,12 +14,10 @@ class ClientsImport implements ToCollection, WithHeadingRow
     */
     public function collection(Collection $collection)
     {
-    //    dd($collection);
-       foreach ($collection as $item) {
+          foreach ($collection as $item) {
           if (isset($item['naimenovanie']) && $item['naimenovanie'] != null) {
               $value = $item['data_dogovora'];
               $date = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value);
-         //     dd($date);
 
               Client::firstOrCreate([
                   'name' => $item['naimenovanie'],

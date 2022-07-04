@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\Clients\IndexController;
 /*
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
 
-    Route::get('/', IndexController::class);
+    Route::get('/', FertilizerController::class);
 
 });*/
 
@@ -36,7 +36,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'],
 Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
     function () {
 
-        Route::get('/', 'IndexController')->name('admin.clients.index');
+       Route::get('/', 'IndexController')->name('admin.clients.index');
         Route::get('/create', 'CreateController')->name('admin.clients.create');
         Route::post('/', 'StoreController')->name('admin.clients.store');
         Route::get('/{client}', 'ShowController')->name('admin.clients.show');
@@ -59,6 +59,14 @@ Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
 
         });
 
+        Route::group([ 'namespace' => 'Import', 'prefix' => 'import'], function () {
+
+            Route::get('/fertilizer', 'FertilizerController')->
+            name('import_fertilizer.index');
+            Route::get('/clients', 'ClientsController')->
+            name('import_clients.index');
+        });
+
         Route::group([ 'namespace' => 'Culture', 'prefix' => 'cultures'],
             function () {
 
@@ -74,7 +82,7 @@ Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
 
     });
 
-Route::group(['namespace' => 'App\Http\Controllers\Fertilizer', 'prefix' => 'fertilizer'],
+/*Route::group(['namespace' => 'App\Http\Controllers\Fertilizer', 'prefix' => 'fertilizer'],
     function () {
 
                 Route::get('/', 'IndexController')->name('fertilizer.index');
@@ -85,7 +93,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Fertilizer', 'prefix' => 'fer
                 Route::patch('/{fertilizer}', 'UpdateController')->name('fertilizer.update');
                 Route::delete('/{fertilizer}', 'DeleteController')->name('fertilizer.delete');
 
-    });
+    });*/
 
 Route::group([ 'namespace' => 'App\Http\Controllers\Admin\User', 'prefix' => 'users'],
     function () {

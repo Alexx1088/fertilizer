@@ -31,6 +31,10 @@
                            class="btn btn-block btn-primary"
                         style="width: auto">Добавить</a>
                     </div>
+                    <div class="col-3 mb-3 ml-5">
+                        <a href="{{ route('import_clients.index') }}"
+                           class="btn btn-block btn-primary">Импорт данных из эксель файла</a>
+                    </div>
                 </div>
                 <div class="row"
                 <div>
