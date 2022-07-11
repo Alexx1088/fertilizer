@@ -18,6 +18,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'fertilizer.created' => [
+            'App\Events\FertilizerEvent@fertilizerCreated',
+        ],
+        'fertilizer.updated' => [
+            'App\Events\FertilizerEvent@fertilizerUpdated',
+        ],
     ];
 
     /**

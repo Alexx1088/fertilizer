@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('fertilizers', function (Blueprint $table) {
-
+/*
             $table->dropIndex('fertilizer_culture_group_idx');
-            $table->dropColumn('culture_group');
+            $table->dropColumn('culture_group');*/
 
 
         });
