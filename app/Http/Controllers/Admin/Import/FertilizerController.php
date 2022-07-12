@@ -15,15 +15,9 @@ class FertilizerController extends Controller
     {
                       StoreFertilizerJob::dispatch();
       $data = $importRequest->validated();
-      if (isset($data)) {
-          ImportStatus::firstOrCreate(
-              [
-                  'status' => 'in progress',
-                  'users_id' => 444,
-                  ]
-          );
-      }
-
-        return view('admin.import.import_fertilizer');
+ //dd($data);
+        $import_status = ImportStatus::all();
+//    dd($import_status);
+        return view('admin.import.import_fertilizer', compact('import_status'));
     }
 }

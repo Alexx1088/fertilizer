@@ -19,6 +19,33 @@
                         </form>
                         </button>
                     </div>
+        <table class="table mt-5">
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Статус</th>
+                <th scope="col">id юзера</th>
+                <th scope="col">Дата создания статуса</th>
+            </tr>
+            </thead>
+            <tbody>
+            @if(isset($import_status))
+                @foreach($import_status as $item)
+            <tr>
+                <td>{{$item->id}}</td>
+                <td>{{$item->status}}</td>
+                <td>{{$item->users_id}}</td>
+                <td>{{$item->created_at}}</td>
+                            </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="3">Данные не найдены </td>
+                </tr>
+            @endif
+
+            </tbody>
+        </table>
     </div>
 
        @endsection
