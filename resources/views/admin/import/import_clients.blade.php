@@ -9,7 +9,7 @@
             @endif
             <form action="{{route('import_clients.index') }}" method="post" enctype="multipart/form-data">
                 @csrf
-                @method('get')
+              {{--  @method('get')--}}
                 <div class="form-group">
                     <input type="file" name="import_file">
 

@@ -61,10 +61,9 @@ Route::group([ 'namespace' => 'Clients', 'prefix' => 'clients'],
 
         Route::group([ 'namespace' => 'Import', 'prefix' => 'import'], function () {
 
-            Route::get('/fertilizer', 'FertilizerController')->
-            name('import_fertilizer.index');
-            Route::get('/clients', 'ClientsController')->
-            name('import_clients.index');
+            Route::get('/fertilizer', 'FertilizerController')->name('import_fertilizer.index');
+            Route::get('/fertilizer/update', 'Fertilizer_update_Controller')->name('import_fertilizer.update');
+            Route::post('/clients', 'ClientsController')->name('import_clients.index');
         });
 
         Route::group([ 'namespace' => 'Culture', 'prefix' => 'cultures'],
