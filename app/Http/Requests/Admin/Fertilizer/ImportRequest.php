@@ -25,7 +25,6 @@ class ImportRequest extends FormRequest
     {
         return [
      'import_file' => 'nullable',
-       //  'import_file' => 'required',
 
         ];
     }

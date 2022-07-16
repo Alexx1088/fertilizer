@@ -17,11 +17,10 @@ class FertilizerController extends Controller
     {
              ImportStatus::Create([
             'status' => 'в процессе',
-            'users_id' => 1,
+           'users_id' => 1,
         ]);
 
-        $import_status = ImportStatus::all();
-
+             $import_status = ImportStatus::all();
         return view('admin.import.import_fertilizer', compact('import_status' ));
     }
 }

@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\DB;
 class Fertilizer_update_Controller extends Controller
 {
 
-    public function __invoke(ImportStatus $importStatus )
+    public function __invoke(ImportRequest $importRequest )
     {
+           dd($importRequest['import_file']);
+
                   StoreFertilizerJob::dispatch();
-  $imp_stat = ImportStatus::where("status", '=', "в процессе")->update(["status"=>"ok"]);
-        //      dd($imp_stat);
 
       /*  DB::table('import_statuses')
             ->where('status', '=', 'в процессе')

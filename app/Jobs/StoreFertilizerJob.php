@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Imports\FertilizersImport;
 use App\Models\ImportStatus;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -32,13 +33,17 @@ class StoreFertilizerJob implements ShouldQueue
      */
     public function handle()
     {
-        Excel::import(new FertilizersImport(),
-            public_path('excel/import/fertilizers.xls'));
+        try {
+            Excel::import(new FertilizersImport(),
+                public_path('excel/import/fertilizers.xls'));
 
-/* $imp_stat = ImportStatus::where("status", "в процессе")->update(["status"
-        => "Данные успешно импортированы"]);*/
-  //      dd($imp_stat);
-     //   return view('admin.import.import_fertilizer', compact('import_status'));
-        return back()->withStatus('');
+            ImportStatus::where("status", '=', "в процессе")->update
+            (["status" => "Данные успешно импортированы"]);
+
+            return back()->withStatus('');
+        } catch (Exception $e) {
+                    ImportStatus::where("status", '=', "в процессе")->update
+                (["status" => "Ошибка во время импорта"]);
+             }
     }
 }
