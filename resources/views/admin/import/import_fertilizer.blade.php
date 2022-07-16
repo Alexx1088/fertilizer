@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="content-wrapper">
-                    <div class="card-body col-5 ml-3" style="border: solid 1px darkred">
+                            <div class="card-body col-5 ml-3" style="border: solid 1px darkred">
                         @if (session('status'))
                             <div class="alert alert-success col-5" role="alert">
                                 {{ session('status') }}
