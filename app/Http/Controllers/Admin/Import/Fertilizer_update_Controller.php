@@ -8,15 +8,26 @@ use App\Http\Requests\Admin\User\UpdateRequest;
 use App\Jobs\StoreFertilizerJob;
 use App\Models\ImportStatus;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class Fertilizer_update_Controller extends Controller
 {
 
     public function __invoke(ImportRequest $importRequest )
     {
-           dd($importRequest['import_file']);
+      /*  $date = $importRequest->only(['import_file']);
 
-                  StoreFertilizerJob::dispatch();
+        dd($date);*/
+
+ $importRequest->validate(['import_file' => 'required|mimes:xls']);
+
+        ImportStatus::Create([
+            'status' => 'в процессе',
+            'users_id' => 1,
+        ]);
+
+
+            StoreFertilizerJob::dispatch();
 
       /*  DB::table('import_statuses')
             ->where('status', '=', 'в процессе')

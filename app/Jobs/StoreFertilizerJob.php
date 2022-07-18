@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Requests\Admin\Clients\ImportRequest;
 use App\Imports\FertilizersImport;
 use App\Models\ImportStatus;
 use Exception;
@@ -31,19 +32,21 @@ class StoreFertilizerJob implements ShouldQueue
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function handle()
+    public function handle(ImportRequest $importRequest)
     {
         try {
-            Excel::import(new FertilizersImport(),
-                public_path('excel/import/fertilizers.xls'));
+            Excel::import(new FertilizersImport,
+                $importRequest->file('import_file')
+            );
 
             ImportStatus::where("status", '=', "в процессе")->update
             (["status" => "Данные успешно импортированы"]);
 
             return back()->withStatus('');
         } catch (Exception $e) {
-                    ImportStatus::where("status", '=', "в процессе")->update
-                (["status" => "Ошибка во время импорта"]);
-             }
+            ImportStatus::where("status", '=', "в процессе")->update
+            (["status" => "Ошибка во время импорта"]);
+
+        }
     }
 }

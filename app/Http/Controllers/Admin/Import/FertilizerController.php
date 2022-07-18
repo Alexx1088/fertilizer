@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Fertilizer\ImportRequest;
 use App\Jobs\StoreFertilizerJob;
 use App\Models\ImportStatus;
 use Exception;
+use Symfony\Component\Console\Input\Input;
 use function Symfony\Component\HttpKernel\DataCollector\getMessage;
 
 class FertilizerController extends Controller
@@ -15,10 +16,11 @@ class FertilizerController extends Controller
 
     public function __invoke( ImportRequest $importRequest )
     {
-             ImportStatus::Create([
+
+               /*  ImportStatus::Create([
             'status' => 'в процессе',
            'users_id' => 1,
-        ]);
+        ]);*/
 
              $import_status = ImportStatus::all();
         return view('admin.import.import_fertilizer', compact('import_status' ));

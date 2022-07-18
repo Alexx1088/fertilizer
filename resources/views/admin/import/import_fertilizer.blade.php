@@ -4,11 +4,11 @@
 
     <div class="content-wrapper">
                             <div class="card-body col-5 ml-3" style="border: solid 1px darkred">
-                        @if (session('status'))
+                      {{--  @if (session('status'))
                             <div class="alert alert-success col-5" role="alert">
                                 {{ session('status') }}
                             </div>
-                        @endif
+                        @endif--}}
                         <form action="{{route('import_fertilizer.update') }}" method="post" enctype="multipart/form-data">
                             @csrf
                     @method('get')
